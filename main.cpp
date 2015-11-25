@@ -33,6 +33,8 @@ public:
 };
 Player player;
 
+
+
 void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
