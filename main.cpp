@@ -316,24 +316,45 @@ void Display(void){
 		glTranslatef(0.2, 0, 0);
 
 	
-
+		// Ž©‹@‚ð+45“x‚Ü‚ÅŒX‚¯‚é
 		if (keyUp == 1)
 		{
 			rotate_x++;
 			if (rotate_x >= 45)
 			{
 				rotate_x = 45;
+				rotate_x--;
+				if (rotate_x <= 0)
+				{
+					rotate_x = 0;
+				}
 			}
 		}
-		if (keyUp == 0)
+		// Ž©‹@‚ð-45“xŒX‚¯‚é
+		if (keyDown == 1)
 		{
 			rotate_x--;
-			if (rotate_x <= 0)
+			if (rotate_x <= -45)
+			{
+				rotate_x = -45;
+				rotate_x++;
+				if (rotate_x >= 0)
+				{
+					rotate_x = 0;
+				}
+			}
+		}
+
+
+	/*	if (keyDown == 0)
+		{
+			rotate_x++;
+			if (rotate_x >= 0)
 			{
 				rotate_x = 0;
 			}
 		}
-		
+	*/	
 		glRotatef(rotate_x, 1, 0, 0);
 
 
