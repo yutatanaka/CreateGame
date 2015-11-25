@@ -1,2 +1,3 @@
-# CreateGame
-テスト
+﻿# CreateGame
+
+ゲーム作品
