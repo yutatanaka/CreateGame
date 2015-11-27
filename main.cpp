@@ -24,7 +24,7 @@ unsigned int keyRight;
 unsigned int keySpace;
 unsigned int lastSpaceKey;
 
-float rotate_x = 0;
+float rotate = 0;
 
 class Player
 {
@@ -316,46 +316,38 @@ void Display(void){
 		glTranslatef(0.2, 0, 0);
 
 	
-		// Ž©‹@‚ð+45“x‚Ü‚ÅŒX‚¯‚é
+		// Ž©‹@‚ð+45“x‚Ü‚Åã‚ÉŒX‚¯‚é
 		if (keyUp == 1)
 		{
-			rotate_x++;
-			if (rotate_x >= 45)
+			rotate++;
+			if (rotate >= 45)
 			{
-				rotate_x = 45;
-				rotate_x--;
-				if (rotate_x <= 0)
+				rotate = 45;
+				rotate--;
+				if (rotate<= 0)
 				{
-					rotate_x = 0;
+					rotate = 0;
 				}
 			}
 		}
-		// Ž©‹@‚ð-45“xŒX‚¯‚é
+		// Ž©‹@‚ð-45“x‚Ü‚Å‰º‚ÉŒX‚¯‚é
 		if (keyDown == 1)
 		{
-			rotate_x--;
-			if (rotate_x <= -45)
+			rotate--;
+			if (rotate <= -45)
 			{
-				rotate_x = -45;
-				rotate_x++;
-				if (rotate_x >= 0)
+				rotate = -45;
+				rotate++;
+				if (rotate >= 0)
 				{
-					rotate_x = 0;
+					rotate = 0;
 				}
 			}
 		}
 
 
-	/*	if (keyDown == 0)
-		{
-			rotate_x++;
-			if (rotate_x >= 0)
-			{
-				rotate_x = 0;
-			}
-		}
-	*/	
-		glRotatef(rotate_x, 1, 0, 0);
+	
+		glRotatef(rotate, 1, 0, 0);
 
 
 		glEnable(GL_TEXTURE_2D);
