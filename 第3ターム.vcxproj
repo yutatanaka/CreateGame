@@ -11,9 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FlyingObject.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FlyingObject.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

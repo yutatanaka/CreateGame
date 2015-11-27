@@ -110,8 +110,20 @@ public:
 			+ y * y
 			+ z * z
 			);
+
 		return length;
 	}
+
+	float Normalize()
+	{
+		float normalize = 0;
+		x = x / Length();
+		y = y / Length();
+		z = z / Length();
+
+		return normalize;
+	}
+
 };
 
 class FlyingObject
@@ -128,7 +140,7 @@ public:
 };
 void FlyingObject::Update()
 {
-	direction.normalize();
+	direction.Normalize();
 	position += direction * speed;
 };
 
