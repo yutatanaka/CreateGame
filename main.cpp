@@ -15,6 +15,7 @@ unsigned int nIndices;
 unsigned int nNormals;
 unsigned int nTextureCoords;
 
+// キーボード変数
 bool keyUp = false;
 bool keyDown = false;
 bool keyLeft = false;
@@ -22,6 +23,7 @@ bool keyRight = false;
 bool keySpace = false;
 bool lastSpaceKey = false;
 
+// 回転変数
 float rotate_x = 0;
 float rotate_y = 0;
 float rotate_z = 0;
@@ -31,11 +33,105 @@ class Vec3
 public:
 	float x, y, z;
 
-private:
-	Vec3(float x_axis, float y_axis, float z_axis){};
+	Vec3(){};
 	~Vec3(){};
 
+	Vec3(float x_axis, float y_axis, float z_axis)
+	{
+		x = x_axis;
+		y = x_axis;
+		z = x_axis;
+	}
+
+	Vec3& operator +(const Vec3 vector)
+	{
+		x + vector.x;
+		y + vector.y;
+		z + vector.z;
+	}
+
+
+	Vec3& operator -(const Vec3 vector)
+	{
+		x + vector.x;
+		y + vector.y;
+		z + vector.z;
+	}
+
+	Vec3& operator *(const Vec3 vector)
+	{
+		x * vector.x;
+		y * vector.y;
+		z * vector.z;
+	}
+
+	Vec3& operator *(const float v)
+	{
+		x * v;
+		y * v;
+		z * v;
+	}
+
+
+	Vec3& operator +=(const Vec3 vector)
+	{
+		x += vector.x;
+		y += vector.y;
+		z += vector.z;
+
+		return *this;
+	}
+
+
+	Vec3& operator -=(const Vec3 vector)
+	{
+		x += vector.x;
+		y += vector.y;
+		z += vector.z;
+
+		return *this;
+	}
+
+
+	Vec3& operator *=(const Vec3 vector)
+	{
+		x *= vector.x;
+		y *= vector.y;
+		z *= vector.z;
+
+		return *this;
+	}
+
+	float Length()
+	{
+		float length =
+			sqrt(
+			x * x
+			+ y * y
+			+ z * z
+			);
+		return length;
+	}
 };
+
+class FlyingObject
+{
+public:
+	
+	Vec3 position; // 位置
+	Vec3 direction;// 向いてる方向
+	
+	float speed;   // 速度
+
+	virtual void Update() = 0; // 更新メソッド
+	virtual void Draw() = 0;   // 描画メソッド
+};
+void FlyingObject::Update()
+{
+	direction.normalize();
+	position += direction * speed;
+};
+
 
 class Player
 {
