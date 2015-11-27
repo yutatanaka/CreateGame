@@ -1,4 +1,4 @@
-
+ï»¿
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,74 +10,89 @@
 #include "Types.h"
 #include "LoadTexture.h"
 
-using namespace glm;
-
 unsigned int nVertices;
 unsigned int nIndices;
 unsigned int nNormals;
 unsigned int nTextureCoords;
 
-unsigned int keyUp;
-unsigned int keyDown;
-unsigned int keyLeft;
-unsigned int keyRight;
-unsigned int keySpace;
-unsigned int lastSpaceKey;
+bool keyUp = false;
+bool keyDown = false;
+bool keyLeft = false;
+bool keyRight = false;
+bool keySpace = false;
+bool lastSpaceKey = false;
 
 float rotate_x = 0;
 float rotate_y = 0;
 float rotate_z = 0;
 
-class Player
+class Vec3
 {
 public:
 	float x, y, z;
+
+private:
+	Vec3(float x_axis, float y_axis, float z_axis){};
+	~Vec3(){};
+
+};
+
+class Player
+{
+public:
+	
 };
 Player player;
 
+class Camera
+{
+public:
+};
+Camera camera;
 
 
+// ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®é–¢æ•°
 void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 'w':
-		keyUp = 1; break;
-	case 's':
-		keyDown = 1; break;
-	case 'a':
-		keyLeft = 1; break;
-	case 'd':
-		keyRight = 1; break;
-	case ' ':
-		keySpace = 1; break;
+	case 'w': // wã‚­ãƒ¼
+		keyUp = true; break;
+	case 's': // sã‚­ãƒ¼
+		keyDown = true; break;
+	case 'a': // aã‚­ãƒ¼
+		keyLeft = true; break;
+	case 'd': // dã‚­ãƒ¼
+		keyRight = true; break;
+	case ' ': // spaceã‚­ãƒ¼
+		keySpace = true; break;
 	}
 
 }
 
+// ã‚­ãƒ¼ãŒé›¢ã•ã‚ŒãŸæ™‚ã®é–¢æ•°
 void keyboardUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 'w':
-		keyUp = 0; break;
-	case 's':
-		keyDown = 0; break;
-	case 'a':
-		keyLeft = 0; break;
-	case 'd':
-		keyRight = 0; break;
-	case ' ':
-		keySpace = 0; break;
+	case 'w': // wã‚­ãƒ¼
+		keyUp = false;    break;
+	case 's': // sã‚­ãƒ¼
+		keyDown = false;  break;
+	case 'a': // aã‚­ãƒ¼
+		keyLeft = false;  break;
+	case 'd': // dã‚­ãƒ¼
+		keyRight = false; break;
+	case ' ': // spaceã‚­ãƒ¼
+		keySpace = false; break;
 	}
 
 }
 
-void LoadTextureFile()
+// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€é–¢æ•°
+void LoadTextureFile(char *fileData)
 {
-	FILE *pFile = fopen(
-		"res/sf.bmp",
-		"rb");
+	FILE *pFile = fopen(fileData,"rb");
 	assert(pFile != NULL);
 
 	fread(
@@ -125,23 +140,23 @@ void LoadTextureFile()
 	}
 }
 
-// Xƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚ŞŠÖ”
-void LoadXFile()
+// Xãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€é–¢æ•°
+void LoadXFile(char *fileData)
 {
-	FILE *pFile = fopen("res/sf.x", "r");
+	FILE *pFile = fopen(fileData, "r");
 	assert(pFile != NULL);
 
 	char buf[256];
 	char buf1[256];
-	int n;
+	int normal;
 
 	while (1){
-		n = fscanf(pFile, "%s", &buf);
-		if (n < 1)
+		normal = fscanf(pFile, "%s", &buf);
+		if (normal < 1)
 			break;
 		if (strcmp(buf, "template") == 0){
 			while (strcmp(buf, "}") != 0){
-				n = fscanf(pFile, "%s", &buf);
+				normal = fscanf(pFile, "%s", &buf);
 			}
 		}
 		if (strcmp(buf, "Mesh") == 0){
@@ -155,7 +170,7 @@ void LoadXFile()
 			fscanf(pFile, "%s", &buf);
 			//printf("%s\n", buf);
 
-			n = fscanf(pFile, "%u", &nVertices);
+			normal = fscanf(pFile, "%u", &nVertices);
 			//printf("nVertices:%u\n", nVertices);
 
 			Vertices = (Vertex *)malloc(sizeof(Vertex) * nVertices);
@@ -173,7 +188,7 @@ void LoadXFile()
 				fscanf(pFile, "%*2s");
 			}
 
-			n = fscanf(pFile, "%u", &nIndices);
+			normal = fscanf(pFile, "%u", &nIndices);
 			//printf("nVertices:%u\n", nIndices);
 
 			Indices = (Index *)malloc(sizeof(Index) * nIndices); 
@@ -203,7 +218,7 @@ void LoadXFile()
 			fscanf(pFile, "%s", &buf);
 			//printf("%s\n", buf);
 
-			n = fscanf(pFile, "%u", &nTextureCoords);
+			normal = fscanf(pFile, "%u", &nTextureCoords);
 			//printf("nNormals:%u\n", nTextureCoords);
 
 			fscanf(pFile, "%*1s");
@@ -230,12 +245,12 @@ void CreateNormals()
 
 	for (int i = 0; i < nIndices; i++)
 	{
-		vec3 ver0(Vertices[Indices[i].x].x, Vertices[Indices[i].x].y, Vertices[Indices[i].x].z);
-		vec3 ver1(Vertices[Indices[i].y].x, Vertices[Indices[i].y].y, Vertices[Indices[i].y].z);
-		vec3 ver2(Vertices[Indices[i].z].x, Vertices[Indices[i].z].y, Vertices[Indices[i].z].z);
-		vec3 vec01 = ver1 - ver0;
-		vec3 vec02 = ver2 - ver0;
-		vec3 n = cross(vec01, vec02);
+		glm::vec3 ver0(Vertices[Indices[i].x].x, Vertices[Indices[i].x].y, Vertices[Indices[i].x].z);
+		glm::vec3 ver1(Vertices[Indices[i].y].x, Vertices[Indices[i].y].y, Vertices[Indices[i].y].z);
+		glm::vec3 ver2(Vertices[Indices[i].z].x, Vertices[Indices[i].z].y, Vertices[Indices[i].z].z);
+		glm::vec3 vec01 = ver1 - ver0;
+		glm::vec3 vec02 = ver2 - ver0;
+		glm::vec3 n = cross(vec01, vec02);
 		n = normalize(n);
 
 		Normals[Indices[i].x].x = n.x; Normals[Indices[i].x].y = n.y; Normals[Indices[i].x].z = n.z;
@@ -257,21 +272,25 @@ void Display(void){
 		100);	// GLdouble zFar
 
 	glMatrixMode(GL_MODELVIEW);// GLenum mode
+
 	glLoadIdentity();
+
 	gluLookAt(
 		5, 5, 10,	// GLdouble eyex, eyey, eyez
 		0, 0, 0,	// GLdouble centerx, centery, centerz
 		0, 1, 0);	// GLdouble upx, upy, upz
 
 	glEnable(GL_DEPTH_TEST);
+
 	glEnable(GL_LIGHTING);
+
 	glEnable(GL_LIGHT0);
 	
 	static unsigned int frame = 0;
 	frame++;
 	glRotatef(frame, 0, 1, 0);
 
-	// ƒeƒNƒXƒ`ƒƒƒf[ƒ^‚ğVARM‚É“]‘—
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‡ãƒ¼ã‚¿ã‚’VARMã«è»¢é€
 	glTexImage2D(
 		GL_TEXTURE_2D,			//GLenum target
 		0,						//GLint level
@@ -285,19 +304,18 @@ void Display(void){
 	GLint filter =
 		GL_NEAREST;
 
-	//ƒeƒNƒ`ƒƒ‚ğk¬•\¦‚µ‚½‚Æ‚«‚ÌƒtƒBƒ‹ƒ^[
+	//ãƒ†ã‚¯ãƒãƒ£ã‚’ç¸®å°è¡¨ç¤ºã—ãŸã¨ãã®ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼
 	glTexParameteri(
 		GL_TEXTURE_2D,			//GLenum target
 		GL_TEXTURE_MIN_FILTER,	//GLenum pname
 		filter);				//GLint param
-	// ƒeƒNƒXƒ`ƒƒ‚ğŠg‘å•\¦‚µ‚½‚Æ‚«‚ÌƒtƒBƒ‹ƒ^[
+
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’æ‹¡å¤§è¡¨ç¤ºã—ãŸã¨ãã®ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼
 	glTexParameteri(
 		GL_TEXTURE_2D,			//GLenum target
 		GL_TEXTURE_MAG_FILTER,	//GLenum pname
 		filter);				//GLint param
 
-
-	glLineWidth(100);
 	glBegin(GL_LINES);
 	{
 	
@@ -317,9 +335,9 @@ void Display(void){
 	{
 		glTranslatef(0.2, 0, 0);
 
-	
-		// ©‹@‚ğ+45“x‚Ü‚Åã‚ÉŒX‚¯‚é
-		if (keyUp == 1)
+		// ï¼·ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
+		// è‡ªæ©Ÿã‚’+45åº¦ã¾ã§ä¸Šã«å‚¾ã‘ã‚‹
+		if (keyUp == true)
 		{
 			rotate_x++;
 
@@ -334,8 +352,10 @@ void Display(void){
 				}
 			}
 		}
-		// ©‹@‚ğ-45“x‚Ü‚Å‰º‚ÉŒX‚¯‚é
-		if (keyDown == 1)
+
+		// ï¼³ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
+		// è‡ªæ©Ÿã‚’-45åº¦ã¾ã§ä¸‹ã«å‚¾ã‘ã‚‹
+		if (keyDown == true)
 		{
 			rotate_x--;
 
@@ -351,7 +371,9 @@ void Display(void){
 			}
 		}
 
-		if (keyLeft == 1)
+		// Aã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
+		// è‡ªæ©Ÿã‚’ï½šè»¸45åº¦ã¾ã§å‚¾ã‘ã‚‹
+		if (keyLeft == true)
 		{
 			rotate_z++;
 
@@ -367,6 +389,8 @@ void Display(void){
 			}
 		}
 
+		// â…®ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
+		// è‡ªæ©Ÿã‚’ï½šè»¸ï½°45åº¦ã¾ã§å‚¾ã‘ã‚‹
 		if (keyRight == 1)
 		{
 			rotate_z--;
@@ -383,24 +407,27 @@ void Display(void){
 			}
 		}
 	
+		// Xè»¸å›è»¢
 		glRotatef(rotate_x, 1, 0, 0);
+
+		// Zè»¸å›è»¢
 		glRotatef(rotate_z, 0, 0, 1);
 
 		glEnable(GL_TEXTURE_2D);
 		
-		// ’¸“_À•W”z—ñ‚ğ—LŒø‚É‚·‚é
+		// é ‚ç‚¹åº§æ¨™é…åˆ—ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 		glEnableClientState(GL_VERTEX_ARRAY);
 		
-		// ƒCƒ“ƒfƒbƒNƒX”z—ñ‚ğ—LŒø‚É‚·‚é
+		// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 		glEnableClientState(GL_INDEX_ARRAY);
 		
-		// –@ü”z—ñ‚ğ—LŒø‚É‚·‚é
+		// æ³•ç·šé…åˆ—ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 		glEnableClientState(GL_NORMAL_ARRAY);
 		
-		// ƒeƒNƒXƒ`ƒƒ”z—ñ‚ğ—LŒø‚É‚·‚é
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£é…åˆ—ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		
-		// ƒeƒNƒXƒ`ƒƒƒf[ƒ^‚ğƒZƒbƒg
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒƒãƒˆ
 		
 		glTexCoordPointer(
 			2,
@@ -408,20 +435,20 @@ void Display(void){
 			0,
 			TextureCoords);
 		
-		// ’¸“_ƒf[ƒ^‚ğƒZƒbƒg
+		// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒƒãƒˆ
 		glVertexPointer(
 			3,
 			GL_FLOAT,
 			0,
 			Vertices);
 		
-		// –@üƒf[ƒ^‚ğƒZƒbƒg
+		// æ³•ç·šãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒƒãƒˆ
 		glNormalPointer(
 			GL_FLOAT,
 			0,
 			Normals);
 
-		// ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^‚ğƒZƒbƒg
+		// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒƒãƒˆ
 		glDrawElements(
 			GL_TRIANGLES,
 			nIndices * 3,
@@ -449,9 +476,9 @@ void timer(int value)
 int main(int argc, char *argv[])
 {
 
-	LoadXFile();
+	LoadXFile("res/sf.x");
 
-	LoadTextureFile();
+	LoadTextureFile("res/sf.bmp");
 
 	CreateNormals();
 
