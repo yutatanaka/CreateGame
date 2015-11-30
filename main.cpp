@@ -8,6 +8,8 @@
 #include "glm\glm.hpp"
 #include "glut.h"
 #include "Types.h"
+#include "Vec3.h"
+#include "FlyingObject.h"
 
 unsigned int nVertices;
 unsigned int nIndices;
@@ -306,6 +308,23 @@ void Display(void){
 		GL_TEXTURE_2D,			//GLenum target
 		GL_TEXTURE_MAG_FILTER,	//GLenum pname
 		filter);				//GLint param
+
+	// 床の描画
+	glBegin(GL_LINES);
+	{
+		for (float z = -100.0; z <= 100.0; z += 1)
+		{
+			glVertex3f(-10, 0, z);
+			glVertex3f(10, 0, z);
+
+		}
+		for (float x = -10.0; x <= 10.0; x += 1)
+		{
+			glVertex3f(x, 0, -100);
+			glVertex3f(x, 0, 100);
+		}
+	}
+	glEnd();
 
 	glBegin(GL_LINES);
 	{
