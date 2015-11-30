@@ -13,10 +13,13 @@
   <ItemGroup>
     <ClCompile Include="FlyingObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Types.cpp" />
+    <ClCompile Include="Vec3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FlyingObject.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="Vec3.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{471BF59C-382C-4766-BE62-69EF89E9F9D6}</ProjectGuid>

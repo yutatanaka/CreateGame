@@ -8,7 +8,6 @@
 #include "glm\glm.hpp"
 #include "glut.h"
 #include "Types.h"
-#include "LoadTexture.h"
 
 unsigned int nVertices;
 unsigned int nIndices;
@@ -28,127 +27,11 @@ float rotate_x = 0;
 float rotate_y = 0;
 float rotate_z = 0;
 
-class Vec3
-{
-public:
-	float x, y, z;
-
-	Vec3(){};
-	~Vec3(){};
-
-	Vec3(float x_axis, float y_axis, float z_axis)
-	{
-		x = x_axis;
-		y = x_axis;
-		z = x_axis;
-	}
-
-	Vec3& operator +(const Vec3 vector)
-	{
-		x + vector.x;
-		y + vector.y;
-		z + vector.z;
-	}
-
-
-	Vec3& operator -(const Vec3 vector)
-	{
-		x + vector.x;
-		y + vector.y;
-		z + vector.z;
-	}
-
-	Vec3& operator *(const Vec3 vector)
-	{
-		x * vector.x;
-		y * vector.y;
-		z * vector.z;
-	}
-
-	Vec3& operator *(const float v)
-	{
-		x * v;
-		y * v;
-		z * v;
-	}
-
-
-	Vec3& operator +=(const Vec3 vector)
-	{
-		x += vector.x;
-		y += vector.y;
-		z += vector.z;
-
-		return *this;
-	}
-
-
-	Vec3& operator -=(const Vec3 vector)
-	{
-		x += vector.x;
-		y += vector.y;
-		z += vector.z;
-
-		return *this;
-	}
-
-
-	Vec3& operator *=(const Vec3 vector)
-	{
-		x *= vector.x;
-		y *= vector.y;
-		z *= vector.z;
-
-		return *this;
-	}
-
-	float Length()
-	{
-		float length =
-			sqrt(
-			x * x
-			+ y * y
-			+ z * z
-			);
-
-		return length;
-	}
-
-	float Normalize()
-	{
-		float normalize = 0;
-		x = x / Length();
-		y = y / Length();
-		z = z / Length();
-
-		return normalize;
-	}
-
-};
-
-class FlyingObject
-{
-public:
-	
-	Vec3 position; // 位置
-	Vec3 direction;// 向いてる方向
-	
-	float speed;   // 速度
-
-	virtual void Update() = 0; // 更新メソッド
-	virtual void Draw() = 0;   // 描画メソッド
-};
-void FlyingObject::Update()
-{
-	direction.Normalize();
-	position += direction * speed;
-};
-
-
 class Player
 {
 public:
 	
+
 };
 Player player;
 
@@ -281,17 +164,17 @@ void LoadXFile(char *fileData)
 			normal = fscanf(pFile, "%u", &nVertices);
 			//printf("nVertices:%u\n", nVertices);
 
-			Vertices = (Vertex *)malloc(sizeof(Vertex) * nVertices);
+			vertices = (Vertex *)malloc(sizeof(Vertex) * nVertices);
 
 			fscanf(pFile, "%*1s");
 
 			for (int i = 0; i < nVertices; i++)
 			{
-				fscanf(pFile, "%f", &Vertices[i].x);
+				fscanf(pFile, "%f", &vertices[i].x);
 				fscanf(pFile, "%*1s");
-				fscanf(pFile, "%f", &Vertices[i].y);
+				fscanf(pFile, "%f", &vertices[i].y);
 				fscanf(pFile, "%*1s");
-				fscanf(pFile, "%f", &Vertices[i].z);
+				fscanf(pFile, "%f", &vertices[i].z);
 				//printf("%d %d %f %f %f\n", i, nVertices, Vertices[i].m_x, Vertices[i].m_y, Vertices[i].m_z);
 				fscanf(pFile, "%*2s");
 			}
@@ -299,17 +182,17 @@ void LoadXFile(char *fileData)
 			normal = fscanf(pFile, "%u", &nIndices);
 			//printf("nVertices:%u\n", nIndices);
 
-			Indices = (Index *)malloc(sizeof(Index) * nIndices); 
+			indices = (Index *)malloc(sizeof(Index) * nIndices); 
 
 			fscanf(pFile, "%*1s");
 			for (int i = 0; i < nIndices; i++)
 			{
 				fscanf(pFile, "%*2s");
-				fscanf(pFile, "%u", &Indices[i].x);
+				fscanf(pFile, "%u", &indices[i].x);
 				fscanf(pFile, "%*1s");
-				fscanf(pFile, "%u", &Indices[i].y);
+				fscanf(pFile, "%u", &indices[i].y);
 				fscanf(pFile, "%*1s");
-				fscanf(pFile, "%u", &Indices[i].z);
+				fscanf(pFile, "%u", &indices[i].z);
 				//printf("%d %d %u %u %u\n", i, nIndices, Indices[i].m_ix, Indices[i].m_iy, Indices[i].m_iz);
 				fscanf(pFile, "%*2s");
 			}
@@ -331,13 +214,13 @@ void LoadXFile(char *fileData)
 
 			fscanf(pFile, "%*1s");
 
-			TextureCoords = (Texture *)malloc(sizeof(Texture) * nTextureCoords);
+			textureCoords = (Texture *)malloc(sizeof(Texture) * nTextureCoords);
 
 			for (int i = 0; i < nTextureCoords; i++)
 			{
-				fscanf(pFile, "%f", &TextureCoords[i].x);
+				fscanf(pFile, "%f", &textureCoords[i].x);
 				fscanf(pFile, "%*1s");
-				fscanf(pFile, "%f", &TextureCoords[i].y);
+				fscanf(pFile, "%f", &textureCoords[i].y);
 				fscanf(pFile, "%*1s");
 				fscanf(pFile, "%*2s");
 			}
@@ -349,21 +232,21 @@ void LoadXFile(char *fileData)
 
 void CreateNormals()
 {
-	Normals = (Normal*)malloc(sizeof(Normal) * nVertices);
+	normals = (Normal*)malloc(sizeof(Normal) * nVertices);
 
 	for (int i = 0; i < nIndices; i++)
 	{
-		glm::vec3 ver0(Vertices[Indices[i].x].x, Vertices[Indices[i].x].y, Vertices[Indices[i].x].z);
-		glm::vec3 ver1(Vertices[Indices[i].y].x, Vertices[Indices[i].y].y, Vertices[Indices[i].y].z);
-		glm::vec3 ver2(Vertices[Indices[i].z].x, Vertices[Indices[i].z].y, Vertices[Indices[i].z].z);
+		glm::vec3 ver0(vertices[indices[i].x].x, vertices[indices[i].x].y, vertices[indices[i].x].z);
+		glm::vec3 ver1(vertices[indices[i].y].x, vertices[indices[i].y].y, vertices[indices[i].y].z);
+		glm::vec3 ver2(vertices[indices[i].z].x, vertices[indices[i].z].y, vertices[indices[i].z].z);
 		glm::vec3 vec01 = ver1 - ver0;
 		glm::vec3 vec02 = ver2 - ver0;
 		glm::vec3 n = cross(vec01, vec02);
 		n = normalize(n);
 
-		Normals[Indices[i].x].x = n.x; Normals[Indices[i].x].y = n.y; Normals[Indices[i].x].z = n.z;
-		Normals[Indices[i].y] = Normals[Indices[i].x];
-		Normals[Indices[i].z] = Normals[Indices[i].x];
+		normals[indices[i].x].x = n.x; normals[indices[i].x].y = n.y; normals[indices[i].x].z = n.z;
+		normals[indices[i].y] = normals[indices[i].x];
+		normals[indices[i].z] = normals[indices[i].x];
 	}
 }
 
@@ -541,27 +424,27 @@ void Display(void){
 			2,
 			GL_FLOAT,
 			0,
-			TextureCoords);
+			textureCoords);
 		
 		// 頂点データをセット
 		glVertexPointer(
 			3,
 			GL_FLOAT,
 			0,
-			Vertices);
+			vertices);
 		
 		// 法線データをセット
 		glNormalPointer(
 			GL_FLOAT,
 			0,
-			Normals);
+			normals);
 
 		// インデックスデータをセット
 		glDrawElements(
 			GL_TRIANGLES,
 			nIndices * 3,
 			GL_UNSIGNED_INT,
-			Indices);
+			indices);
 
 		
 	}
@@ -606,8 +489,8 @@ int main(int argc, char *argv[])
 	glutKeyboardUpFunc(keyboardUp);
 	glutMainLoop();
 
-	free (TextureCoords);
-	free (Normals);
-	free (Indices);
-	free (Vertices);
+	free (textureCoords);
+	free (normals);
+	free (indices);
+	free (vertices);
 }
