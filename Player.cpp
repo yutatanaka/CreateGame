@@ -1,8 +1,8 @@
 
 #include "Player.h"
-#define PLAYER_POSITION_X 0
+#define PLAYER_POSITION_X 0.2
 #define PLAYER_POSITION_Y 0
-#define PLAYER_POSITION_Z 5
+#define PLAYER_POSITION_Z 0
 #define PLAYER_DIRECTION_X 0
 #define PLAYER_DIRECTION_Y 0
 #define PLAYER_DIRECTION_Z 1
@@ -40,6 +40,7 @@ void Player::Update()
 // 描画メソッド
 void Player::Draw()
 {
+
 }
 
 // プレイヤー操作メソッド

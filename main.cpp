@@ -31,10 +31,6 @@ float rotate_x = 0;
 float rotate_y = 0;
 float rotate_z = 0;
 
-
-
-
-
 // キーが押された時の関数
 void keyboard(unsigned char key, int x, int y)
 {
@@ -130,28 +126,28 @@ void LoadXFile(char *fileData)
 	FILE *pFile = fopen(fileData, "r");
 	assert(pFile != NULL);
 
-	char buf[256];
-	char buf1[256];
+	char buffer[256];
+	char buffer1[256];
 	int normal;
 
 	while (1){
-		normal = fscanf(pFile, "%s", &buf);
+		normal = fscanf(pFile, "%s", &buffer);
 		if (normal < 1)
 			break;
-		if (strcmp(buf, "template") == 0){
-			while (strcmp(buf, "}") != 0){
-				normal = fscanf(pFile, "%s", &buf);
+		if (strcmp(buffer, "template") == 0){
+			while (strcmp(buffer, "}") != 0){
+				normal = fscanf(pFile, "%s", &buffer);
 			}
 		}
-		if (strcmp(buf, "Mesh") == 0){
+		if (strcmp(buffer, "Mesh") == 0){
 
-			if (strcmp(buf1, "the") == 0){
-				strcpy(buf1, buf);
+			if (strcmp(buffer1, "the") == 0){
+				strcpy(buffer1, buffer);
 				continue;
 			}
 			//printf("(%d)%s\n", n, buf);
 
-			fscanf(pFile, "%s", &buf);
+			fscanf(pFile, "%s", &buffer);
 			//printf("%s\n", buf);
 
 			normal = fscanf(pFile, "%u", &nVertices);
@@ -192,14 +188,14 @@ void LoadXFile(char *fileData)
 		}
 
 
-		if (strcmp(buf, "MeshTextureCoords") == 0){
+		if (strcmp(buffer, "MeshTextureCoords") == 0){
 			//printf("(%d)%s\n", n, buf);
-			if (strcmp(buf1, "of") == 0){
-				strcpy(buf1, buf);
+			if (strcmp(buffer1, "of") == 0){
+				strcpy(buffer1, buffer);
 				continue;
 			}
 
-			fscanf(pFile, "%s", &buf);
+			fscanf(pFile, "%s", &buffer);
 			//printf("%s\n", buf);
 
 			normal = fscanf(pFile, "%u", &nTextureCoords);
@@ -218,7 +214,7 @@ void LoadXFile(char *fileData)
 				fscanf(pFile, "%*2s");
 			}
 		}
-		strcpy( buf1, buf);
+		strcpy( buffer1, buffer);
 	}
 	fclose(pFile);
 }
@@ -455,8 +451,6 @@ void Display(void){
 			nIndices * 3,
 			GL_UNSIGNED_INT,
 			indices);
-
-		
 	}
 	glPopMatrix();
 	
@@ -465,13 +459,8 @@ void Display(void){
 
 void timer(int value) 
 {
-	glutTimerFunc(
-		1000 / 60,// unsigned int millis
-		timer,	// void (GLUTCALLBACK *func)(int value)
-		0);		// int value
+	glutTimerFunc(1000 / 60, timer, 0);		
 	glutPostRedisplay();
-
-
 }
 
 int main(int argc, char *argv[])
