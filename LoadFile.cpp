@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <Windows.h>
+#include "glm\glm.hpp"
 #include "Types.h"
 #include "LoadFile.h"
 
@@ -173,5 +174,26 @@ void LoadFile::LoadTextureFile(char *fileData)
 			pixels[bitMapInfo.biWidth * y + x] = pixels[bitMapInfo.biWidth * (bitMapInfo.biHeight - 1 - y) + x];
 			pixels[bitMapInfo.biWidth * (bitMapInfo.biHeight - 1 - y) + x] = pixelsbox;
 		}
+	}
+}
+
+// Ｘファイルを読み込んだ後に法線を求めるメソッド
+void LoadFile::CreateNormals()
+{
+	normals = (Normal*)malloc(sizeof(Normal) * nVertices);
+
+	for (int i = 0; i < nIndices; i++)
+	{
+		glm::vec3 ver0(vertices[indices[i].x].x, vertices[indices[i].x].y, vertices[indices[i].x].z);
+		glm::vec3 ver1(vertices[indices[i].y].x, vertices[indices[i].y].y, vertices[indices[i].y].z);
+		glm::vec3 ver2(vertices[indices[i].z].x, vertices[indices[i].z].y, vertices[indices[i].z].z);
+		glm::vec3 vec01 = ver1 - ver0;
+		glm::vec3 vec02 = ver2 - ver0;
+		glm::vec3 n = cross(vec01, vec02);
+		n = normalize(n);
+
+		normals[indices[i].x].x = n.x; normals[indices[i].x].y = n.y; normals[indices[i].x].z = n.z;
+		normals[indices[i].y] = normals[indices[i].x];
+		normals[indices[i].z] = normals[indices[i].x];
 	}
 }

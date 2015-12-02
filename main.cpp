@@ -48,7 +48,6 @@ void keyboard(unsigned char key, int x, int y)
 	case ' ': // spaceキー
 		keySpace = true; break;
 	}
-
 }
 
 // キーが離された時の関数
@@ -67,28 +66,9 @@ void keyboardUp(unsigned char key, int x, int y)
 	case ' ': // spaceキー
 		keySpace = false; break;
 	}
-
 }
 
-void CreateNormals()
-{
-	normals = (Normal*)malloc(sizeof(Normal) * nVertices);
 
-	for (int i = 0; i < nIndices; i++)
-	{
-		glm::vec3 ver0(vertices[indices[i].x].x, vertices[indices[i].x].y, vertices[indices[i].x].z);
-		glm::vec3 ver1(vertices[indices[i].y].x, vertices[indices[i].y].y, vertices[indices[i].y].z);
-		glm::vec3 ver2(vertices[indices[i].z].x, vertices[indices[i].z].y, vertices[indices[i].z].z);
-		glm::vec3 vec01 = ver1 - ver0;
-		glm::vec3 vec02 = ver2 - ver0;
-		glm::vec3 n = cross(vec01, vec02);
-		n = normalize(n);
-
-		normals[indices[i].x].x = n.x; normals[indices[i].x].y = n.y; normals[indices[i].x].z = n.z;
-		normals[indices[i].y] = normals[indices[i].x];
-		normals[indices[i].z] = normals[indices[i].x];
-	}
-}
 
 void Display(void){
 
@@ -321,7 +301,7 @@ int main(int argc, char *argv[])
 
 	loadFile.LoadTextureFile("res/sf.bmp");
 
-	CreateNormals();
+	loadFile.CreateNormals();
 
 	glutInit(
 		&argc,					// int *argcp

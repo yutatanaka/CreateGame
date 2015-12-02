@@ -18,6 +18,9 @@ public:
 
 	// テクスチャファイル読み込みメソッド
 	void LoadTextureFile(char *fileData);
+
+	// Xファイルを読み込んだ後に法線を求めるメソッド
+	void CreateNormals();
 };
 
 extern LoadFile loadFile;
