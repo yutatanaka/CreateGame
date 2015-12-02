@@ -10,6 +10,7 @@
 #include "Types.h"
 #include "Vec3.h"
 #include "FlyingObject.h"
+#include "Ship.h"
 #include "Player.h"
 
 unsigned int nVertices;
@@ -32,11 +33,6 @@ float rotate_z = 0;
 
 
 
-class Camera
-{
-public:
-};
-Camera camera;
 
 
 // キーが押された時の関数

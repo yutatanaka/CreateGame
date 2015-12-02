@@ -8,8 +8,11 @@ class Vec3
 {
 public:
 	float x, y, z;
-
+	
+	// コンストラクタ
 	Vec3();
+
+	// デストラクタ
 	~Vec3();
 
 	Vec3(float x_axis, float y_axis, float z_axis)
@@ -41,11 +44,11 @@ public:
 		z * vector.z;
 	}
 
-	Vec3& operator *(const float v)
+	Vec3& operator *(const float vector)
 	{
-		x * v;
-		y * v;
-		z * v;
+		x * vector;
+		y * vector;
+		z * vector;
 
 		return *this;
 	}
@@ -80,27 +83,11 @@ public:
 		return *this;
 	}
 
-	float Length()
-	{
-		float length =
-			sqrt(
-			x * x
-			+ y * y
-			+ z * z
-			);
+	// ベクトルの距離を求めるメソッド
+	float Length();
 
-		return length;
-	}
-
-	float Normalize()
-	{
-		float normalize = 0;
-		x = x / Length();
-		y = y / Length();
-		z = z / Length();
-
-		return normalize;
-	}
+	// ベクトルを正規化するメソッド
+	float Normalize();
 
 };
 
