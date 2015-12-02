@@ -35,17 +35,5 @@ typedef struct
 	float x, y;
 }Texture;
 
-extern Vertex *vertices;
-
-extern Index *indices;
-
-extern TextureRGB *pixels;
-extern BITMAPFILEHEADER bitMapFile;
-extern BITMAPINFOHEADER bitMapInfo;
-
-extern Normal *normals;
-
-extern Texture *textureCoords;
-
 #endif  // TYPES_H_
 

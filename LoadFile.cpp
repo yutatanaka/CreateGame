@@ -10,21 +10,22 @@
 #include "LoadFile.h"
 
 
-extern unsigned int nVertices;
-extern unsigned int nIndices;
-extern unsigned int nNormals;
-extern unsigned int nTextureCoords;
-
-LoadFile loadFile;
-
 // コンストラクタ
-LoadFile::LoadFile()
+LoadFile::LoadFile(char *fileData, char *textureFileData)
 {
+	LoadXFile(fileData);
+	LoadTextureFile(textureFileData);
+	CreateNormals();
 }
 
 // デストラクタ
 LoadFile::~LoadFile()
 {
+	free (vertices);
+	free (indices);
+	free (textureCoords);
+	free (normals);
+	free (pixels);
 }
 
 // Xファイルを読み込む関数
@@ -37,7 +38,9 @@ void LoadFile::LoadXFile(char *fileData)
 	char buffer1[256];
 	int normal;
 
-	while (1){
+
+	while (1)
+	{
 		normal = fscanf(pFile, "%s", &buffer);
 		if (normal < 1)
 			break;
@@ -60,9 +63,9 @@ void LoadFile::LoadXFile(char *fileData)
 			normal = fscanf(pFile, "%u", &nVertices);
 			//printf("nVertices:%u\n", nVertices);
 
-			vertices = (Vertex *)malloc(sizeof(Vertex) * nVertices);
-
 			fscanf(pFile, "%*1s");
+
+			vertices = (Vertex *)malloc(sizeof(Vertex) * nVertices);
 
 			for (int i = 0; i < nVertices; i++)
 			{
@@ -79,6 +82,7 @@ void LoadFile::LoadXFile(char *fileData)
 			//printf("nVertices:%u\n", nIndices);
 
 			indices = (Index *)malloc(sizeof(Index) * nIndices);
+
 
 			fscanf(pFile, "%*1s");
 			for (int i = 0; i < nIndices; i++)
@@ -180,7 +184,7 @@ void LoadFile::LoadTextureFile(char *fileData)
 // Ｘファイルを読み込んだ後に法線を求めるメソッド
 void LoadFile::CreateNormals()
 {
-	normals = (Normal*)malloc(sizeof(Normal) * nVertices);
+	normals = (Normal *)malloc(sizeof(Normal) * nNormals);
 
 	for (int i = 0; i < nIndices; i++)
 	{

@@ -18,7 +18,3 @@ void FlyingObject::Update()
 	position += direction * speed;
 };
 
-
-void FlyingObject::Draw()
-{
-};

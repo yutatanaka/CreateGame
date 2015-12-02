@@ -1,5 +1,9 @@
-
+ï»¿
 #include "Player.h"
+#include "LoadFile.h"
+#include "Model.h"
+#include "KeyBoard.h"
+
 #define PLAYER_POSITION_X 0.2
 #define PLAYER_POSITION_Y 0
 #define PLAYER_POSITION_Z 0
@@ -8,42 +12,115 @@
 #define PLAYER_DIRECTION_Z 1
 #define PLAYER_SPEED 5 
 
-Player player;
-
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^:ƒvƒŒƒCƒ„[‰Šú‰»
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿:ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åˆæœŸåŒ–
 Player::Player()
 {
-	// ‰ŠúˆÊ’u
-	player.position.x = PLAYER_POSITION_X;
-	player.position.y = PLAYER_POSITION_Y;
-	player.position.z = PLAYER_POSITION_Z;
+	// åˆæœŸä½ç½®
+	position.x = PLAYER_POSITION_X;
+	position.y = PLAYER_POSITION_Y;
+	position.z = PLAYER_POSITION_Z;
 
-	// Œü‚¢‚Ä‚é•ûŒü
-	player.direction.x = PLAYER_DIRECTION_X;
-	player.direction.y = PLAYER_DIRECTION_Y;
-	player.direction.z = PLAYER_DIRECTION_Z;
+	// å‘ã„ã¦ã‚‹æ–¹å‘
+	direction.x = PLAYER_DIRECTION_X;
+	direction.y = PLAYER_DIRECTION_Y;
+	direction.z = PLAYER_DIRECTION_Z;
 
-	// ‰Šú‘¬“x
-	player.speed = PLAYER_SPEED;
+	// åˆæœŸé€Ÿåº¦
+	speed = PLAYER_SPEED;
+
+	m_Model = new Model(new LoadFile("res/sf.x", "res/sf.bmp"));
 };
 
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Player::~Player()
 {
+	delete m_Model;
 };
 
-// XVƒƒ\ƒbƒh
+// æ›´æ–°ãƒ¡ã‚½ãƒƒãƒ‰
 void Player::Update()
 {
+
+	// ï¼·ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
+	// è‡ªæ©Ÿã‚’+45åº¦ã¾ã§ä¸Šã«å‚¾ã‘ã‚‹
+	if (KeyBoard::keyUp == true)
+	{
+		rotation.x++;
+
+		if (rotation.x >= 45)
+		{
+			rotation.x = 45;
+			rotation.x--;
+
+			if (rotation.x <= 0)
+			{
+				rotation.x = 0;
+			}
+		}
+	}
+
+	// ï¼³ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
+	// è‡ªæ©Ÿã‚’-45åº¦ã¾ã§ä¸‹ã«å‚¾ã‘ã‚‹
+	if (KeyBoard::keyDown == true)
+	{
+		rotation.x--;
+
+		if (rotation.x <= -45)
+		{
+			rotation.x = -45;
+			rotation.x++;
+
+			if (rotation.x >= 0)
+			{
+				rotation.x = 0;
+			}
+		}
+	}
+
+	// Aã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
+	// è‡ªæ©Ÿã‚’ï½šè»¸45åº¦ã¾ã§å‚¾ã‘ã‚‹
+	if (KeyBoard::keyLeft == true)
+	{
+		rotation.z++;
+
+		if (rotation.z >= 45)
+		{
+			rotation.z = 45;
+			rotation.z--;
+
+			if (rotation.z <= 0)
+			{
+				rotation.z = 0;
+			}
+		}
+	}
+
+	// â…®ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
+	// è‡ªæ©Ÿã‚’ï½šè»¸ï½°45åº¦ã¾ã§å‚¾ã‘ã‚‹
+	if (KeyBoard::keyRight == 1)
+	{
+		rotation.z--;
+
+		if (rotation.z <= -45)
+		{
+			rotation.z = -45;
+			rotation.z++;
+
+			if (rotation.z >= 0)
+			{
+				rotation.z = 0;
+			}
+		}
+	}
 }
 
-// •`‰æƒƒ\ƒbƒh
+// æç”»ãƒ¡ã‚½ãƒƒãƒ‰
 void Player::Draw()
 {
-
+	m_Model->Draw(position,rotation,scale);
 }
 
-// ƒvƒŒƒCƒ„[‘€ìƒƒ\ƒbƒh
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ“ä½œãƒ¡ã‚½ãƒƒãƒ‰
 void Player::Control(float player_x, float player_y, unsigned int buttonMask)
 {
 

@@ -9,66 +9,15 @@
 #include "glut.h"
 #include "Types.h"
 #include "LoadFile.h"
+#include "Model.h"
 #include "Vec3.h"
 #include "FlyingObject.h"
 #include "Ship.h"
 #include "Player.h"
-
-unsigned int nVertices;
-unsigned int nIndices;
-unsigned int nNormals;
-unsigned int nTextureCoords;
-
-// キーボード変数
-bool keyUp = false;
-bool keyDown = false;
-bool keyLeft = false;
-bool keyRight = false;
-bool keySpace = false;
-bool lastSpaceKey = false;
-
-// 回転変数
-float rotate_x = 0;
-float rotate_y = 0;
-float rotate_z = 0;
-
-// キーが押された時の関数
-void keyboard(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-	case 'w': // wキー
-		keyUp = true; break;
-	case 's': // sキー
-		keyDown = true; break;
-	case 'a': // aキー
-		keyLeft = true; break;
-	case 'd': // dキー
-		keyRight = true; break;
-	case ' ': // spaceキー
-		keySpace = true; break;
-	}
-}
-
-// キーが離された時の関数
-void keyboardUp(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-	case 'w': // wキー
-		keyUp = false;    break;
-	case 's': // sキー
-		keyDown = false;  break;
-	case 'a': // aキー
-		keyLeft = false;  break;
-	case 'd': // dキー
-		keyRight = false; break;
-	case ' ': // spaceキー
-		keySpace = false; break;
-	}
-}
+#include "KeyBoard.h"
 
 
+Player *player = new Player();
 
 void Display(void){
 
@@ -101,31 +50,6 @@ void Display(void){
 	frame++;
 	glRotatef(frame, 0, 1, 0);
 
-	// テクスチャデータをVARMに転送
-	glTexImage2D(
-		GL_TEXTURE_2D,			//GLenum target
-		0,						//GLint level
-		GL_RGB,					//GLint internalformat
-		bitMapInfo.biWidth, bitMapInfo.biHeight,				//GLsizei width, height
-		0,						//GLint border
-		GL_RGB,					//GLenum format
-		GL_UNSIGNED_BYTE,		//GLenum type
-		pixels);				//const GLvoid *pixels
-
-	GLint filter =
-		GL_NEAREST;
-
-	//テクチャを縮小表示したときのフィルター
-	glTexParameteri(
-		GL_TEXTURE_2D,			//GLenum target
-		GL_TEXTURE_MIN_FILTER,	//GLenum pname
-		filter);				//GLint param
-
-	// テクスチャを拡大表示したときのフィルター
-	glTexParameteri(
-		GL_TEXTURE_2D,			//GLenum target
-		GL_TEXTURE_MAG_FILTER,	//GLenum pname
-		filter);				//GLint param
 
 	// 床の描画
 	glBegin(GL_LINES);
@@ -159,132 +83,6 @@ void Display(void){
 	}
 	glEnd();
 
-	glPushMatrix();
-	{
-		glTranslatef(0.2, 0, 0);
-
-		// Ｗキーを押したら
-		// 自機を+45度まで上に傾ける
-		if (keyUp == true)
-		{
-			rotate_x++;
-
-			if (rotate_x >= 45)
-			{
-				rotate_x = 45;
-				rotate_x--;
-				
-				if (rotate_x<= 0)
-				{
-					rotate_x = 0;
-				}
-			}
-		}
-
-		// Ｓキーを押したら
-		// 自機を-45度まで下に傾ける
-		if (keyDown == true)
-		{
-			rotate_x--;
-
-			if (rotate_x <= -45)
-			{
-				rotate_x = -45;
-				rotate_x++;
-
-				if (rotate_x >= 0)
-				{
-					rotate_x = 0;
-				}
-			}
-		}
-
-		// Aキーを押したら
-		// 自機をｚ軸45度まで傾ける
-		if (keyLeft == true)
-		{
-			rotate_z++;
-
-			if (rotate_z >= 45)
-			{
-				rotate_z = 45;
-				rotate_z--;
-
-				if (rotate_z <= 0)
-				{
-					rotate_z = 0;
-				}
-			}
-		}
-
-		// Ⅾキーを押したら
-		// 自機をｚ軸ｰ45度まで傾ける
-		if (keyRight == 1)
-		{
-			rotate_z--;
-
-			if (rotate_z <= -45)
-			{
-				rotate_z = -45;
-				rotate_z++;
-
-				if (rotate_z >= 0)
-				{
-					rotate_z = 0;
-				}
-			}
-		}
-	
-		// X軸回転
-		glRotatef(rotate_x, 1, 0, 0);
-
-		// Z軸回転
-		glRotatef(rotate_z, 0, 0, 1);
-
-		glEnable(GL_TEXTURE_2D);
-		
-		// 頂点座標配列を有効にする
-		glEnableClientState(GL_VERTEX_ARRAY);
-		
-		// インデックス配列を有効にする
-		glEnableClientState(GL_INDEX_ARRAY);
-		
-		// 法線配列を有効にする
-		glEnableClientState(GL_NORMAL_ARRAY);
-		
-		// テクスチャ配列を有効にする
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		
-		// テクスチャデータをセット
-		
-		glTexCoordPointer(
-			2,
-			GL_FLOAT,
-			0,
-			textureCoords);
-		
-		// 頂点データをセット
-		glVertexPointer(
-			3,
-			GL_FLOAT,
-			0,
-			vertices);
-		
-		// 法線データをセット
-		glNormalPointer(
-			GL_FLOAT,
-			0,
-			normals);
-
-		// インデックスデータをセット
-		glDrawElements(
-			GL_TRIANGLES,
-			nIndices * 3,
-			GL_UNSIGNED_INT,
-			indices);
-	}
-	glPopMatrix();
-	
 	glFlush();
 }
 
@@ -296,12 +94,6 @@ void timer(int value)
 
 int main(int argc, char *argv[])
 {
-
-	loadFile.LoadXFile("res/sf.x");
-
-	loadFile.LoadTextureFile("res/sf.bmp");
-
-	loadFile.CreateNormals();
 
 	glutInit(
 		&argc,					// int *argcp
@@ -315,12 +107,8 @@ int main(int argc, char *argv[])
 		timer,// void (GLUTCALLBACK *func)(int value)
 		0);// int value
 
-	glutKeyboardFunc(keyboard);
-	glutKeyboardUpFunc(keyboardUp);
+	glutKeyboardFunc(KeyBoard::DownUpdate);
+	glutKeyboardUpFunc(KeyBoard::UpUpdate);
 	glutMainLoop();
 
-	free (textureCoords);
-	free (normals);
-	free (indices);
-	free (vertices);
 }
