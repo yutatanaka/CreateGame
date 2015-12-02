@@ -13,11 +13,15 @@
   <ItemGroup>
     <ClCompile Include="FlyingObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Types.cpp" />
     <ClCompile Include="Vec3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FlyingObject.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Vec3.h" />
   </ItemGroup>

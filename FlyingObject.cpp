@@ -8,6 +8,10 @@ FlyingObject::FlyingObject()
 	speed = 0;
 }
 
+FlyingObject::~FlyingObject()
+{
+}
+
 void FlyingObject::Update()
 {
 	direction.Normalize();

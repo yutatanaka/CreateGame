@@ -10,6 +10,7 @@
 #include "Types.h"
 #include "Vec3.h"
 #include "FlyingObject.h"
+#include "Player.h"
 
 unsigned int nVertices;
 unsigned int nIndices;
@@ -29,13 +30,7 @@ float rotate_x = 0;
 float rotate_y = 0;
 float rotate_z = 0;
 
-class Player
-{
-public:
-	
 
-};
-Player player;
 
 class Camera
 {
