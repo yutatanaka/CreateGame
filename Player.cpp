@@ -13,11 +13,12 @@
 #define PLAYER_SCALE_X 1
 #define PLAYER_SCALE_Y 1
 #define PLAYER_SCALE_Z 1
-#define PLAYER_SPEED  1
+#define PLAYER_SPEED  0.01
 
 // コンストラクタ:プレイヤー初期化
 Player::Player()
 {
+
 	m_Model = new Model(new LoadFile("res/sf.x", "res/sf.bmp"));
 
 	// 初期位置

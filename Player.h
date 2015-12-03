@@ -25,6 +25,4 @@ private:
 
 	Model *m_Model;
 };
-
-
 #endif // _PLAYER_
