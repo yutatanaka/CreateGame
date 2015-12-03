@@ -16,7 +16,6 @@
 #include "Player.h"
 #include "KeyBoard.h"
 
-
 Player *player = new Player();
 
 void Display(void){
@@ -46,10 +45,13 @@ void Display(void){
 
 	glEnable(GL_LIGHT0);
 	
-	static unsigned int frame = 0;
+	/*static unsigned int frame = 0;
 	frame++;
-	glRotatef(frame, 0, 1, 0);
+	glRotatef(frame, 0, 1, 0);*/
 
+	player->Draw();
+
+	player->Update();
 
 	// 床の描画
 	glBegin(GL_LINES);
@@ -67,10 +69,11 @@ void Display(void){
 		}
 	}
 	glEnd();
-
+	
+	// x、y、z軸
 	glBegin(GL_LINES);
 	{
-	
+		glColor3f(1, 0, 0);
 		glVertex3f(0, 0, 0);
 		glVertex3f(0, 100, 0);
 
@@ -95,12 +98,11 @@ void timer(int value)
 int main(int argc, char *argv[])
 {
 
-	glutInit(
-		&argc,					// int *argcp
-		argv);					// char **argv
-	glutCreateWindow("title");  // const char *title
+	glutInit(&argc,argv);
+	
+	glutCreateWindow("title"); 
 
-	glutDisplayFunc(Display);	// void (GLUTCALLBACK *func)(void)
+	glutDisplayFunc(Display);
 
 	glutTimerFunc(
 		0,// unsigned int millis
@@ -108,7 +110,9 @@ int main(int argc, char *argv[])
 		0);// int value
 
 	glutKeyboardFunc(KeyBoard::DownUpdate);
+
 	glutKeyboardUpFunc(KeyBoard::UpUpdate);
+
 	glutMainLoop();
 
 }

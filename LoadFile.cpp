@@ -184,7 +184,7 @@ void LoadFile::LoadTextureFile(char *fileData)
 // Ｘファイルを読み込んだ後に法線を求めるメソッド
 void LoadFile::CreateNormals()
 {
-	normals = (Normal *)malloc(sizeof(Normal) * nNormals);
+	normals = (Normal*)malloc(sizeof(Normal) * nVertices);
 
 	for (int i = 0; i < nIndices; i++)
 	{

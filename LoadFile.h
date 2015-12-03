@@ -10,7 +10,7 @@ class LoadFile
 public:
 
 	// コンストラクタ
-	LoadFile(char *fileData, char*textureFiledata);
+	LoadFile(char *fileData, char*textureFileData);
 
 	// デストラクタ
 	~LoadFile();

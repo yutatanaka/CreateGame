@@ -14,7 +14,5 @@ FlyingObject::~FlyingObject()
 
 void FlyingObject::Update()
 {
-	direction.Normalize();
-	position += direction * speed;
 };
 

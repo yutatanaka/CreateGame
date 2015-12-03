@@ -10,7 +10,9 @@ class Player : Ship
 {
 public:
 
+	// コンストラクタ
 	Player();
+	// デストラクタ
 	~Player();
 
 	void Update();				// 更新メソッド
@@ -20,7 +22,6 @@ public:
 	void Control(float player_x, float player_y, unsigned int buttonMask);
 
 private:
-
 
 	Model *m_Model;
 };

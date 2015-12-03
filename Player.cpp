@@ -9,12 +9,17 @@
 #define PLAYER_POSITION_Z 0
 #define PLAYER_DIRECTION_X 0
 #define PLAYER_DIRECTION_Y 0
-#define PLAYER_DIRECTION_Z 1
-#define PLAYER_SPEED 5 
+#define PLAYER_DIRECTION_Z -1
+#define PLAYER_SCALE_X 1
+#define PLAYER_SCALE_Y 1
+#define PLAYER_SCALE_Z 1
+#define PLAYER_SPEED  1
 
 // コンストラクタ:プレイヤー初期化
 Player::Player()
 {
+	m_Model = new Model(new LoadFile("res/sf.x", "res/sf.bmp"));
+
 	// 初期位置
 	position.x = PLAYER_POSITION_X;
 	position.y = PLAYER_POSITION_Y;
@@ -25,10 +30,13 @@ Player::Player()
 	direction.y = PLAYER_DIRECTION_Y;
 	direction.z = PLAYER_DIRECTION_Z;
 
+	// 倍率
+	scale.x = PLAYER_SCALE_X;
+	scale.y = PLAYER_SCALE_Y;
+	scale.z = PLAYER_SCALE_Z;
+
 	// 初期速度
 	speed = PLAYER_SPEED;
-
-	m_Model = new Model(new LoadFile("res/sf.x", "res/sf.bmp"));
 };
 
 // デストラクタ
@@ -40,6 +48,9 @@ Player::~Player()
 // 更新メソッド
 void Player::Update()
 {
+
+	direction.Normalize();
+	position += direction * speed;
 
 	// Ｗキーを押したら
 	// 自機を+45度まで上に傾ける
