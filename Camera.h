@@ -14,7 +14,6 @@ public:
 
 	Vec3 position;
 
-private:
 	// 更新メソッド
 	void Update();
 	// カメラ視点メソッド

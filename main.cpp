@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include "glm\glm.hpp"
 #include "glut.h"
+#include "Camera.h"
 #include "Types.h"
 #include "LoadFile.h"
 #include "Model.h"
@@ -34,10 +35,7 @@ void Display(void){
 
 	glLoadIdentity();
 
-	gluLookAt(
-		5, 5, 10,	// GLdouble eyex, eyey, eyez
-		0, 0, 0,	// GLdouble centerx, centery, centerz
-		0, 1, 0);	// GLdouble upx, upy, upz
+	camera.Look();
 
 	glEnable(GL_DEPTH_TEST);
 
