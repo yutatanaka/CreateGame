@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Field.cpp" />
     <ClCompile Include="FlyingObject.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="LoadFile.cpp" />
@@ -24,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Field.h" />
     <ClInclude Include="FlyingObject.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="LoadFile.h" />
