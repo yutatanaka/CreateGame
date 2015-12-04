@@ -37,6 +37,8 @@ void Display(void){
 
 	glLoadIdentity();
 
+	camera.Update();
+
 	camera.Look();
 
 	glEnable(GL_DEPTH_TEST);
@@ -48,12 +50,18 @@ void Display(void){
 	/*static unsigned int frame = 0;
 	frame++;
 	glRotatef(frame, 0, 1, 0);*/
+	glPushMatrix();
+	{
+		gameManager.player->Draw();
 
-	gameManager.player->Draw();
+		gameManager.player->Update();
 
-	gameManager.player->Update();
-
-	field.Draw();
+		
+	}
+	glPopMatrix();
+	glPushMatrix();
+		field.Draw();
+	glPopMatrix();
 
 	glFlush();
 }

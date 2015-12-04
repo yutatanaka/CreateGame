@@ -3,6 +3,7 @@
 #define _GAMEMANAGER_H_
 
 #include "Player.h"
+#include "Field.h"
 
 class GameManager
 {

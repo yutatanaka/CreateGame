@@ -7,6 +7,7 @@ Field field;
 
 void Field::Update()
 {
+
 }
 
 void Field::Draw()

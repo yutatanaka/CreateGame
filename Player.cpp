@@ -53,17 +53,6 @@ void Player::Update()
 	direction.Normalize();
 	position += direction * speed;
 
-	Vec3 cp = direction;
-	cp.x = -cp.x ;
-	cp.z = -cp.z ;
-	cp.y = 0;
-
-	cp.x *= 10.0f;
-	cp.z *= 10.0f;
-	cp.y = 10.0f;
-
-	cp.x += position.x;
-	cp.z += position.z;
 
 	// プレイヤー座標(xz) + ( プレイヤーの逆向き(xz) * 離したい距離 ) + 高さ
 
