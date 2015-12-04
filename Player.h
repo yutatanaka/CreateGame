@@ -6,7 +6,7 @@
 #include "Ship.h"
 #include "Model.h"
 
-class Player : Ship
+class Player : public Ship
 {
 public:
 
@@ -25,4 +25,7 @@ private:
 
 	Model *m_Model;
 };
+
+extern Player *player;
+
 #endif // _PLAYER_

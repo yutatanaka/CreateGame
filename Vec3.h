@@ -44,6 +44,7 @@ public:
 		z * vector.z;
 	}
 
+
 	Vec3& operator *(const float vector)
 	{
 		x * vector;

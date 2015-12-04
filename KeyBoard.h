@@ -14,9 +14,9 @@ public:
 	static bool keySpace ;
 	static bool lastSpaceKey ;
 
-	static void DownUpdate(unsigned char key, int x, int y);
+	static void PushUpdate(unsigned char key, int x, int y);
 
-	static void UpUpdate(unsigned char key, int x, int y);
+	static void ReleaseUpdate(unsigned char key, int x, int y);
 };
 
 #endif // _KEYBOARD_H_

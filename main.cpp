@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include "glm\glm.hpp"
 #include "glut.h"
+#include "GameManager.h"
 #include "Camera.h"
 #include "Types.h"
 #include "LoadFile.h"
@@ -18,7 +19,7 @@
 #include "Player.h"
 #include "KeyBoard.h"
 
-Player *player = new Player();
+
 
 void Display(void){
 
@@ -48,9 +49,9 @@ void Display(void){
 	frame++;
 	glRotatef(frame, 0, 1, 0);*/
 
-	player->Draw();
+	gameManager.player->Draw();
 
-	player->Update();
+	gameManager.player->Update();
 
 	field.Draw();
 
@@ -77,9 +78,11 @@ int main(int argc, char *argv[])
 		timer,// void (GLUTCALLBACK *func)(int value)
 		0);// int value
 
-	glutKeyboardFunc(KeyBoard::DownUpdate);
+	glutKeyboardFunc(KeyBoard::PushUpdate);
 
-	glutKeyboardUpFunc(KeyBoard::UpUpdate);
+	glutKeyboardUpFunc(KeyBoard::ReleaseUpdate);
+
+	gameManager.Initialize();
 
 	glutMainLoop();
 
