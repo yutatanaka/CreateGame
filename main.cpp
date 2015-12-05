@@ -22,16 +22,21 @@
 
 
 void Display(void){
+	
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0, 0, 1, 1);
+	
+	glClearColor(RED, GREEN, BLUE, ALPHA);
+	
 	glMatrixMode(GL_PROJECTION);// GLenum mode
+	
 	glLoadIdentity();
+	
 	gluPerspective(
-		60,		// GLdouble fovy
-		1,		// GLdouble aspect
-		0.1,	// GLdouble zNear
-		100);	// GLdouble zFar
+		FOVY,		// GLdouble fovy
+		ASPECT,		// GLdouble aspect
+		ZNEAR,	// GLdouble zNear
+		ZFAR);	// GLdouble zFar
 
 	glMatrixMode(GL_MODELVIEW);// GLenum mode
 
@@ -47,20 +52,19 @@ void Display(void){
 
 	glEnable(GL_LIGHT0);
 	
-	/*static unsigned int frame = 0;
-	frame++;
-	glRotatef(frame, 0, 1, 0);*/
 	glPushMatrix();
 	{
 		gameManager.player->Draw();
 
 		gameManager.player->Update();
 
-		
 	}
 	glPopMatrix();
+
 	glPushMatrix();
+	{
 		field.Draw();
+	}
 	glPopMatrix();
 
 	glFlush();
@@ -68,7 +72,7 @@ void Display(void){
 
 void timer(int value) 
 {
-	glutTimerFunc(1000 / 60, timer, 0);		
+	glutTimerFunc(MILLIS, timer, VALUE);		
 	glutPostRedisplay();
 }
 
