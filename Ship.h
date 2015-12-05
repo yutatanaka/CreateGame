@@ -13,8 +13,7 @@ public:
 	// デストラクタ
 	~Ship();
 
-	// プレイヤー操作
-	virtual void Control(float player_x, float player_y, unsigned int buttonMask) = 0;
+
 private:
 };
 

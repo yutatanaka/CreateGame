@@ -4,16 +4,6 @@
 #include "Model.h"
 #include "KeyBoard.h"
 
-#define PLAYER_POSITION_X 0.2
-#define PLAYER_POSITION_Y 0
-#define PLAYER_POSITION_Z 0
-#define PLAYER_DIRECTION_X 0
-#define PLAYER_DIRECTION_Y 0
-#define PLAYER_DIRECTION_Z -1
-#define PLAYER_SCALE_X 1
-#define PLAYER_SCALE_Y 1
-#define PLAYER_SCALE_Z 1
-#define PLAYER_SPEED  0.01
 
 // コンストラクタ:プレイヤー初期化
 Player::Player()
@@ -40,11 +30,13 @@ Player::Player()
 	speed = PLAYER_SPEED;
 };
 
+
 // デストラクタ
 Player::~Player()
 {
 	delete m_Model;
 };
+
 
 // 更新メソッド
 void Player::Update()
@@ -129,14 +121,12 @@ void Player::Update()
 	}
 }
 
+
 // 描画メソッド
 void Player::Draw()
 {
 	m_Model->Draw(position,rotation,scale);
 }
 
-// プレイヤー操作メソッド
-void Player::Control(float player_x, float player_y, unsigned int buttonMask)
-{
 
-}
+

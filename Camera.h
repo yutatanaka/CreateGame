@@ -4,6 +4,7 @@
 
 #include "Vec3.h"
 
+
 class Camera
 {
 public:

@@ -7,7 +7,6 @@
 #include "Player.h"
 #include "glut.h"
 
-#define M_PI 3.141592
 
 Camera camera;
 
@@ -26,6 +25,8 @@ Camera::~Camera()
 
 void Camera::Update()
 {
+	const float releaseDistance = 10.0f;
+	const int cameraY_axis = 0;
 
 	// プレイヤー座標(xz) + ( プレイヤーの逆向き(xz) * 離したい距離 ) + 高さ
 
@@ -33,11 +34,11 @@ void Camera::Update()
 
 	position.x = -position.x;
 	position.z = -position.z;
-	position.y = 0;
+	position.y = cameraY_axis;
 
-	position.x *= 10.0f;
-	position.z *= 10.0f;
-	position.y *= 10.0f;
+	position.x *= releaseDistance;
+	position.z *= releaseDistance;
+	position.y *= releaseDistance;
 
 	position.x += gameManager.player->position.x;
 	position.z += gameManager.player->position.z;
@@ -46,10 +47,15 @@ void Camera::Update()
 
 void Camera::Look()
 {
+	const int cameraWidth = 5;
+	const int cameraUpx = 0;
+	const int cameraUpy = 1;
+	const int cameraUpz = 0;
+	
 	gluLookAt(
-		position.x, position.y + 5, position.z,			// GLdouble eyex, eyey, eyez
+		position.x, position.y + cameraWidth, position.z,			// GLdouble eyex, eyey, eyez
 		gameManager.player->position.x,
 		gameManager.player->position.y,
 		gameManager.player->position.z,				// GLdouble centerx, centery, centerz
-		0, 1, 0);									// GLdouble upx, upy, upz
+		cameraUpx, cameraUpy, cameraUpz);									// GLdouble upx, upy, upz
 }
