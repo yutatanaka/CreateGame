@@ -15,6 +15,7 @@ Camera::Camera()
 
 }
 
+
 // デストラクタ
 Camera::~Camera()
 {

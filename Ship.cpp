@@ -1,5 +1,6 @@
 
 #include "Ship.h"
+#include "Vec3.h"
 
 // コンストラクタ
 Ship::Ship()
@@ -11,4 +12,6 @@ Ship::~Ship()
 {
 }
 
-
+void Ship::Update()
+{
+}

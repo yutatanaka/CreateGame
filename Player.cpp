@@ -1,6 +1,7 @@
 ﻿
 #include <stdlib.h>
 #include "glut.h"
+#include "Vec3.h"
 #include "Player.h"
 #include "LoadFile.h"
 #include "Model.h"
@@ -13,20 +14,29 @@ Player::Player()
 
 	m_Model = new Model(new LoadFile("res/sf.x", "res/sf.bmp"));
 
+	INCREASE_ANGLE_VALUE = ANGLE_VALUE;
+
 	// 初期位置
 	position.x = PLAYER_POSITION_X;
 	position.y = PLAYER_POSITION_Y;
 	position.z = PLAYER_POSITION_Z;
+
+	rotation.x = PLAYER_ROTATION_X;
+	rotation.y = PLAYER_ROTATION_Y;
+	rotation.z = PLAYER_ROTATION_Z;
+
+	// 倍率
+	scale.x = PLAYER_SCALE_X;
+	scale.y = PLAYER_SCALE_Y;
+	scale.z = PLAYER_SCALE_Z;
 
 	// 向いてる方向
 	direction.x = PLAYER_DIRECTION_X;
 	direction.y = PLAYER_DIRECTION_Y;
 	direction.z = PLAYER_DIRECTION_Z;
 
-	// 倍率
-	scale.x = PLAYER_SCALE_X;
-	scale.y = PLAYER_SCALE_Y;
-	scale.z = PLAYER_SCALE_Z;
+	// 現在の角度
+	nowAngle = PLAYER_NOW_ANGLE;
 
 	// 初期速度
 	speed = PLAYER_SPEED;
@@ -44,18 +54,41 @@ Player::~Player()
 void Player::Update()
 {
 	
+	Move();
+
+	Input();
+
+
+
+}
+
+
+// 描画メソッド
+void Player::Draw()
+{
+	m_Model->Draw(position,rotation,scale);
+}
+
+
+/* 移動処理 */
+void Player::Move()
+{
+	//CalcDirection();
+
 	direction.Normalize();
 	position += direction * speed;
+}
 
 
-	// プレイヤー座標(xz) + ( プレイヤーの逆向き(xz) * 離したい距離 ) + 高さ
-
+void Player::Input()
+{
 	// Ｗキーを押したら
 	// 自機を+45度まで上に傾ける
 	if (KeyBoard::keyUp == true)
 	{
-		rotation.x++;
 		
+		rotation.x++;
+
 		if (rotation.x >= 45)
 		{
 			rotation.x = 45;
@@ -90,6 +123,7 @@ void Player::Update()
 	// 自機をｚ軸45度まで傾ける
 	if (KeyBoard::keyLeft == true)
 	{
+		nowAngle += INCREASE_ANGLE_VALUE;
 		rotation.z++;
 
 		if (rotation.z >= 45)
@@ -108,6 +142,7 @@ void Player::Update()
 	// 自機をｚ軸ｰ45度まで傾ける
 	if (KeyBoard::keyRight == 1)
 	{
+		nowAngle -= INCREASE_ANGLE_VALUE;
 		rotation.z--;
 
 		if (rotation.z <= -45)
@@ -122,16 +157,13 @@ void Player::Update()
 		}
 	}
 
-	glRotatef(rotation.x, 1, 0, 0);
-	glRotatef(rotation.z, 0, 0, 1);
 }
 
 
-// 描画メソッド
-void Player::Draw()
+void Player::CalcDirection()
 {
-	m_Model->Draw(position,rotation,scale);
+	//角度をx,y,z方向の要素に分解 
+	direction.x = (sin(nowAngle), 0 , cos(nowAngle));
+
+	//direction.z = (sin(nowAngle), 0 , cos(nowAngle));
 }
-
-
-

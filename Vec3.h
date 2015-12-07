@@ -7,6 +7,7 @@
 class Vec3
 {
 public:
+
 	float x, y, z;
 	
 	// コンストラクタ
@@ -21,6 +22,7 @@ public:
 		y = x_axis;
 		z = x_axis;
 	}
+
 
 	Vec3& operator +(const Vec3 vector)
 	{
