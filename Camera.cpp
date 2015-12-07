@@ -3,7 +3,6 @@
 #include "Camera.h"
 #include "GameManager.h"
 #include "Vec3.h"
-#include "FlyingObject.h"
 #include "Player.h"
 #include "glut.h"
 

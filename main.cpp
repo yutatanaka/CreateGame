@@ -14,7 +14,6 @@
 #include "Model.h"
 #include "Field.h"
 #include "Vec3.h"
-#include "FlyingObject.h"
 #include "Ship.h"
 #include "Player.h"
 #include "KeyBoard.h"

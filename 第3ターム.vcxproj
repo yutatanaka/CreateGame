@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Field.cpp" />
-    <ClCompile Include="FlyingObject.cpp" />
     <ClCompile Include="GameManeger.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="LoadFile.cpp" />

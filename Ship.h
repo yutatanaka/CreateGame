@@ -2,9 +2,9 @@
 #ifndef _SHIP_H_
 #define _SHIP_H_
 
-#include "FlyingObject.h"
+#include "Vec3.h"
 
-class Ship : public FlyingObject
+class Ship
 {
 public:
 
@@ -13,7 +13,18 @@ public:
 	// デストラクタ
 	~Ship();
 
+	Vec3 position; // 位置
+	Vec3 rotation; // 回転
+	Vec3 scale;	   // 倍率
+	Vec3 direction;// 向いてる方向
+	Vec3 nowAngle; // 現在の角度
 
+	float speed;   // 速度
+
+public:
+
+	void Update();			   // 更新メソッド
+	virtual void Draw() = 0;   // 描画メソッド
 private:
 };
 

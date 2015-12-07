@@ -1,4 +1,6 @@
 ﻿
+#include <stdlib.h>
+#include "glut.h"
 #include "Player.h"
 #include "LoadFile.h"
 #include "Model.h"
@@ -53,13 +55,13 @@ void Player::Update()
 	if (KeyBoard::keyUp == true)
 	{
 		rotation.x++;
-
+		
 		if (rotation.x >= 45)
 		{
 			rotation.x = 45;
 			rotation.x--;
 
-			if (rotation.x <= 0)
+			if (rotation.x <= -1)
 			{
 				rotation.x = 0;
 			}
@@ -77,7 +79,7 @@ void Player::Update()
 			rotation.x = -45;
 			rotation.x++;
 
-			if (rotation.x >= 0)
+			if (rotation.x >= 1)
 			{
 				rotation.x = 0;
 			}
@@ -119,6 +121,9 @@ void Player::Update()
 			}
 		}
 	}
+
+	glRotatef(rotation.x, 1, 0, 0);
+	glRotatef(rotation.z, 0, 0, 1);
 }
 
 
