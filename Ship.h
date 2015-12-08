@@ -13,6 +13,9 @@ public:
 	// デストラクタ
 	~Ship();
 
+	virtual void Update();			   // 更新メソッド
+	virtual void Draw() = 0;   // 描画メソッド
+
 	Vec3 position; // 位置
 
 	Vec3 rotation; // 回転
@@ -25,10 +28,6 @@ public:
 
 	float speed;   // 速度
 
-public:
-
-	void Update();			   // 更新メソッド
-	virtual void Draw() = 0;   // 描画メソッド
 };
 
 #endif // _SHIP_H_

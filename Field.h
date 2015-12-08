@@ -8,10 +8,10 @@ class Field
 {
 public: 
 
-	Vec3 position;
-
 	void Update();
 	void Draw();
+
+	Vec3 position;
 
 };
 

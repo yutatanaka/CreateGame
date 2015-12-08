@@ -14,9 +14,8 @@ Player::Player()
 
 	m_Model = new Model(new LoadFile("res/sf.x", "res/sf.bmp"));
 
-	INCREASE_ANGLE_VALUE = ANGLE_VALUE;
 
-	// 初期位置
+	// キャラクタの座標を初期化
 	position.x = PLAYER_POSITION_X;
 	position.y = PLAYER_POSITION_Y;
 	position.z = PLAYER_POSITION_Z;
@@ -25,20 +24,20 @@ Player::Player()
 	rotation.y = PLAYER_ROTATION_Y;
 	rotation.z = PLAYER_ROTATION_Z;
 
-	// 倍率
+	// キャラクタの倍率を初期化
 	scale.x = PLAYER_SCALE_X;
 	scale.y = PLAYER_SCALE_Y;
 	scale.z = PLAYER_SCALE_Z;
 
-	// 向いてる方向
+	// キャラクタの向いてる方向を初期化
 	direction.x = PLAYER_DIRECTION_X;
 	direction.y = PLAYER_DIRECTION_Y;
 	direction.z = PLAYER_DIRECTION_Z;
 
-	// 現在の角度
+	// キャラクタの現在の角度を初期化
 	nowAngle = PLAYER_NOW_ANGLE;
 
-	// 初期速度
+	// キャラクタの速度を初期化
 	speed = PLAYER_SPEED;
 };
 
@@ -70,7 +69,7 @@ void Player::Draw()
 }
 
 
-/* 移動処理 */
+// 移動処理
 void Player::Move()
 {
 	//CalcDirection();

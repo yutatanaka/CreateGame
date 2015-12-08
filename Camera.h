@@ -10,15 +10,17 @@ class Camera
 public:
 	// コンストラクタ
 	Camera();
+
 	// デストラクタ
 	~Camera();
 
-	Vec3 position;
-
 	// 更新メソッド
 	void Update();
+
 	// カメラ視点メソッド
 	void Look();
+
+	Vec3 position;
 };
 
 extern Camera camera;

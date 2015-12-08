@@ -37,8 +37,6 @@ public:
 	// デストラクタ
 	~Player();
 
-	/* 方向転換速度 */
-	float INCREASE_ANGLE_VALUE;
 
 	void Update();				// 更新メソッド
 
@@ -46,17 +44,20 @@ public:
 
 private:
 
-	Model *m_Model;
-
-	/* 移動処理 */
+	// 移動処理をする
 	void Move();
 
-	/* 入力処理をする */
+	// 入力処理をする 
 	void Input();
 
-	/* もっている角度情報を元に方向(Vec3型)を計算する */
+	// もっている角度情報を元に方向(Vec3型)を計算する 
 	void CalcDirection();
 
+
+	Model *m_Model;
+
+	// 方向転換速度 
+	const float INCREASE_ANGLE_VALUE = 0;
 };
 
 extern Player *player;
