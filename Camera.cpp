@@ -53,9 +53,9 @@ void Camera::Look()
 	const int cameraUpz = 0;
 	
 	gluLookAt(
-		position.x, position.y + cameraWidth, position.z,			// GLdouble eyex, eyey, eyez
+		position.x, position.y + cameraWidth, position.z,// GLdouble eyex, eyey, eyez
 		gameManager.player->position.x,
 		gameManager.player->position.y,
-		gameManager.player->position.z,				// GLdouble centerx, centery, centerz
-		cameraUpx, cameraUpy, cameraUpz);									// GLdouble upx, upy, upz
+		gameManager.player->position.z,					 // GLdouble centerx, centery, centerz
+		cameraUpx, cameraUpy, cameraUpz);				 // GLdouble upx, upy, upz
 }

@@ -31,10 +31,10 @@ public:
 	// デストラクタ
 	~GameManager();
 
-	Player *player;
-
 	// 初期化メソッド
-	void Initialize(); 
+	void Initialize();
+
+	Player *player;
 
 };
 

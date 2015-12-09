@@ -34,8 +34,8 @@ void Display(void){
 	gluPerspective(
 		FOVY,		// GLdouble fovy
 		ASPECT,		// GLdouble aspect
-		ZNEAR,	// GLdouble zNear
-		ZFAR);	// GLdouble zFar
+		ZNEAR,		// GLdouble zNear
+		ZFAR);		// GLdouble zFar
 
 	glMatrixMode(GL_MODELVIEW);// GLenum mode
 
@@ -85,9 +85,9 @@ int main(int argc, char *argv[])
 	glutDisplayFunc(Display);
 
 	glutTimerFunc(
-		0,// unsigned int millis
-		timer,// void (GLUTCALLBACK *func)(int value)
-		0);// int value
+		0,		// unsigned int millis
+		timer,	// void (GLUTCALLBACK *func)(int value)
+		0);		// int value
 
 	glutKeyboardFunc(KeyBoard::PushUpdate);
 

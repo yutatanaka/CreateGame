@@ -16,29 +16,30 @@ Player::Player()
 
 
 	// キャラクタの座標を初期化
-	position.x = PLAYER_POSITION_X;
-	position.y = PLAYER_POSITION_Y;
-	position.z = PLAYER_POSITION_Z;
+	position.x = kPlayerPosition_x;
+	position.y = kPlayerPosition_y;
+	position.z = kPlayerPosition_z;
 
-	rotation.x = PLAYER_ROTATION_X;
-	rotation.y = PLAYER_ROTATION_Y;
-	rotation.z = PLAYER_ROTATION_Z;
+	// キャラクタの回転の値を初期化
+	rotation.x = kPlayerRotation_x;
+	rotation.y = kPlayerRotation_y;
+	rotation.z = kPlayerRotation_z;
 
 	// キャラクタの倍率を初期化
-	scale.x = PLAYER_SCALE_X;
-	scale.y = PLAYER_SCALE_Y;
-	scale.z = PLAYER_SCALE_Z;
+	scale.x = kPlayerScale_x;
+	scale.y = kPlayerScale_y;
+	scale.z = kPlayerScale_z;
 
 	// キャラクタの向いてる方向を初期化
-	direction.x = PLAYER_DIRECTION_X;
-	direction.y = PLAYER_DIRECTION_Y;
-	direction.z = PLAYER_DIRECTION_Z;
+	direction.x = kPlayerDirection_x;
+	direction.y = kPlayerDirection_y;
+	direction.z = kPlayerDirection_z;
 
 	// キャラクタの現在の角度を初期化
-	nowAngle = PLAYER_NOW_ANGLE;
+	nowAngle = kPlayerNowAngle;
 
 	// キャラクタの速度を初期化
-	speed = PLAYER_SPEED;
+	speed = kPlayerSpeed;
 };
 
 

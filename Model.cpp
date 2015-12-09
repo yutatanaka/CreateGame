@@ -23,11 +23,11 @@ void Model::Draw(Vec3 position, Vec3 rotation, Vec3 scale)
 		GL_TEXTURE_2D,			//GLenum target
 		0,						//GLint level
 		GL_RGB,					//GLint internalformat
-		loadFile->bitMapInfo.biWidth, loadFile->bitMapInfo.biHeight,				//GLsizei width, height
+		loadFile->bitMapInfo.biWidth, loadFile->bitMapInfo.biHeight,//GLsizei width, height
 		0,						//GLint border
 		GL_RGB,					//GLenum format
 		GL_UNSIGNED_BYTE,		//GLenum type
-		loadFile->pixels);				//const GLvoid *pixels
+		loadFile->pixels);		//const GLvoid *pixels
 
 	GLint filter =
 		GL_NEAREST;

@@ -2,31 +2,8 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-
 #include "Ship.h"
 #include "Model.h"
-
-#define ANGLE_VALUE 0.03f
-
-#define PLAYER_POSITION_X 0.2
-#define PLAYER_POSITION_Y 0
-#define PLAYER_POSITION_Z 0
-
-#define PLAYER_ROTATION_X 0
-#define PLAYER_ROTATION_Y 0
-#define PLAYER_ROTATION_Z 0
-
-#define PLAYER_SCALE_X 1
-#define PLAYER_SCALE_Y 1
-#define PLAYER_SCALE_Z 1
-
-#define PLAYER_DIRECTION_X 0
-#define PLAYER_DIRECTION_Y 0
-#define PLAYER_DIRECTION_Z -1
-
-#define PLAYER_NOW_ANGLE 0
-
-#define PLAYER_SPEED  0.01
 
 class Player : public Ship
 {
@@ -58,6 +35,32 @@ private:
 
 	// 方向転換速度 
 	const float INCREASE_ANGLE_VALUE = 0;
+
+	// プレイヤーの座標の初期値(定数)
+	const float kPlayerPosition_x = 0.2f;
+	const float kPlayerPosition_y = 0.0f;
+	const float kPlayerPosition_z = 0.0f;
+
+	// プレイヤーの回転の初期値(定数)
+	const float kPlayerRotation_x = 0.0f;
+	const float kPlayerRotation_y = 0.0f;
+	const float kPlayerRotation_z = 0.0f;
+
+	// プレイヤーのスケールの初期値(定数)
+	const float kPlayerScale_x = 1.0f;
+	const float kPlayerScale_y = 1.0f;
+	const float kPlayerScale_z = 1.0f;
+
+	// プレイヤーの向いてる方向の初期値(定数)
+	const float kPlayerDirection_x = 0.0f;
+	const float kPlayerDirection_y = 0.0f;
+	const float kPlayerDirection_z = -1.0f;
+
+	// プレイヤーの現在の角度の初期値(定数)
+	const float kPlayerNowAngle = 0;
+
+	// プレイヤーの速度の初期値(定数)
+	const float kPlayerSpeed = 0.5f;
 };
 
 extern Player *player;
