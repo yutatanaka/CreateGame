@@ -9,16 +9,16 @@ class Model
 {
 public:
 
-	LoadFile *loadFile;
-
 	// コンストラクタ
 	Model(LoadFile *fileData);
+
 	// デストラクタ
 	~Model();
 
-
 	// 描画メソッド
 	void Draw(Vec3 position, Vec3 rotation, Vec3 scale);
+
+	LoadFile *loadFile;
 };
 
 #endif // MODEL_H_

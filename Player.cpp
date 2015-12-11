@@ -58,8 +58,6 @@ void Player::Update()
 
 	Input();
 
-
-
 }
 
 
@@ -82,16 +80,17 @@ void Player::Move()
 
 void Player::Input()
 {
+
 	// Ｗキーを押したら
-	// 自機を+45度まで上に傾ける
+	// 自機を+20度まで上に傾ける
 	if (KeyBoard::keyUp == true)
 	{
 		
 		rotation.x++;
 
-		if (rotation.x >= 45)
+		if (rotation.x >= 20)
 		{
-			rotation.x = 45;
+			rotation.x = 20;
 			rotation.x--;
 
 			if (rotation.x <= -1)
@@ -100,6 +99,9 @@ void Player::Input()
 			}
 		}
 	}
+
+
+	glRotatef(rotation.x, 1, 0, 0);
 
 	// Ｓキーを押したら
 	// 自機を-45度まで下に傾ける

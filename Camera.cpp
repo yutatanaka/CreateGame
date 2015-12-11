@@ -47,15 +47,17 @@ void Camera::Update()
 
 void Camera::Look()
 {
-	const int cameraWidth = 5;
+	const int cameraWidthY = 7;
+	const int cameraDepthZ = 15;
 	const int cameraUpx = 0;
 	const int cameraUpy = 1;
 	const int cameraUpz = 0;
 	
 	gluLookAt(
-		position.x, position.y + cameraWidth, position.z,// GLdouble eyex, eyey, eyez
-		gameManager.player->position.x,
-		gameManager.player->position.y,
+		position.x, position.y + cameraWidthY, position.z + cameraDepthZ,// GLdouble eyex, eyey, eyez
+		/*gameManager.player->position.x,
+		gameManager.player->position.y,*/
+		0, 0,
 		gameManager.player->position.z,					 // GLdouble centerx, centery, centerz
 		cameraUpx, cameraUpy, cameraUpz);				 // GLdouble upx, upy, upz
 }

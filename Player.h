@@ -47,9 +47,9 @@ private:
 	const float kPlayerRotation_z = 0.0f;
 
 	// プレイヤーのスケールの初期値(定数)
-	const float kPlayerScale_x = 1.0f;
-	const float kPlayerScale_y = 1.0f;
-	const float kPlayerScale_z = 1.0f;
+	const float kPlayerScale_x = 2.0f;
+	const float kPlayerScale_y = 2.0f;
+	const float kPlayerScale_z = 2.0f;
 
 	// プレイヤーの向いてる方向の初期値(定数)
 	const float kPlayerDirection_x = 0.0f;

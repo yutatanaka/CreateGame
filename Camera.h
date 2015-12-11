@@ -21,6 +21,7 @@ public:
 	void Look();
 
 	Vec3 position;
+
 };
 
 extern Camera camera;

@@ -12,7 +12,6 @@ public:
 	void Draw();
 
 	Vec3 position;
-
 };
 
 extern Field field;
