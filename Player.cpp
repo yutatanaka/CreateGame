@@ -1,4 +1,5 @@
 ﻿
+#include <stdio.h>
 #include <stdlib.h>
 #include "glut.h"
 #include "Vec3.h"
@@ -58,6 +59,9 @@ void Player::Update()
 
 	Input();
 
+	Angle();
+
+
 }
 
 
@@ -77,95 +81,49 @@ void Player::Move()
 	position += direction * speed;
 }
 
+// 傾き処理
+void Player::Angle()
+{
+	if (KeyBoard::keyRight == true)
+	{
+		rotation.z -= 15.0f;
+		glRotatef(rotation.z, 0, 0, 1);
+	}
+	else{
+		rotation.z = 0;
+	}
+}
 
+// 入力処理
 void Player::Input()
 {
 
-	// Ｗキーを押したら
-	// 自機を+20度まで上に傾ける
-	if (KeyBoard::keyUp == true)
+	if (KeyBoard::keyRight == true)
 	{
-		
-		rotation.x++;
-
-		if (rotation.x >= 20)
-		{
-			rotation.x = 20;
-			rotation.x--;
-
-			if (rotation.x <= -1)
-			{
-				rotation.x = 0;
-			}
-		}
+		position.x += 0.05;
 	}
 
-
-	glRotatef(rotation.x, 1, 0, 0);
-
-	// Ｓキーを押したら
-	// 自機を-45度まで下に傾ける
-	if (KeyBoard::keyDown == true)
-	{
-		rotation.x--;
-
-		if (rotation.x <= -45)
-		{
-			rotation.x = -45;
-			rotation.x++;
-
-			if (rotation.x >= 1)
-			{
-				rotation.x = 0;
-			}
-		}
-	}
-
-	// Aキーを押したら
-	// 自機をｚ軸45度まで傾ける
 	if (KeyBoard::keyLeft == true)
 	{
-		nowAngle += INCREASE_ANGLE_VALUE;
-		rotation.z++;
-
-		if (rotation.z >= 45)
-		{
-			rotation.z = 45;
-			rotation.z--;
-
-			if (rotation.z <= 0)
-			{
-				rotation.z = 0;
-			}
-		}
+		position.x -= 0.05;
 	}
+	printf("x = %d\n", position.x);
 
-	// Ⅾキーを押したら
-	// 自機をｚ軸ｰ45度まで傾ける
-	if (KeyBoard::keyRight == 1)
+	if (KeyBoard::keyUp == true)
 	{
-		nowAngle -= INCREASE_ANGLE_VALUE;
-		rotation.z--;
-
-		if (rotation.z <= -45)
-		{
-			rotation.z = -45;
-			rotation.z++;
-
-			if (rotation.z >= 0)
-			{
-				rotation.z = 0;
-			}
-		}
+		position.y += 0.05;
 	}
 
+	if (KeyBoard::keyDown == true)
+	{
+		position.y -= 0.05;
+	}
 }
 
 
 void Player::CalcDirection()
 {
 	//角度をx,y,z方向の要素に分解 
-	direction.x = (sin(nowAngle), 0 , cos(nowAngle));
-
+	//direction.x = (sin(nowAngle), 0 , cos(nowAngle));
 	//direction.z = (sin(nowAngle), 0 , cos(nowAngle));
 }

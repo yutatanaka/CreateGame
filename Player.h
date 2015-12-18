@@ -24,6 +24,9 @@ private:
 	// ˆÚ“®ˆ—‚ğ‚·‚é
 	void Move();
 
+	// ŒX‚«ˆ—‚ğ‚·‚é
+	void Angle();
+
 	// “ü—Íˆ—‚ğ‚·‚é 
 	void Input();
 
