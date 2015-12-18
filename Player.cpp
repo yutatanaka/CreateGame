@@ -75,10 +75,10 @@ void Player::Draw()
 // 移動処理
 void Player::Move()
 {
-	//CalcDirection();
 
 	direction.Normalize();
 	position += direction * speed;
+
 }
 
 // 傾き処理
@@ -89,7 +89,8 @@ void Player::Angle()
 		rotation.z -= 15.0f;
 		glRotatef(rotation.z, 0, 0, 1);
 	}
-	else{
+	else
+	{
 		rotation.z = 0;
 	}
 }
@@ -107,23 +108,6 @@ void Player::Input()
 	{
 		position.x -= 0.05;
 	}
-	printf("x = %d\n", position.x);
 
-	if (KeyBoard::keyUp == true)
-	{
-		position.y += 0.05;
-	}
-
-	if (KeyBoard::keyDown == true)
-	{
-		position.y -= 0.05;
-	}
 }
 
-
-void Player::CalcDirection()
-{
-	//角度をx,y,z方向の要素に分解 
-	//direction.x = (sin(nowAngle), 0 , cos(nowAngle));
-	//direction.z = (sin(nowAngle), 0 , cos(nowAngle));
-}

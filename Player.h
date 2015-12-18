@@ -30,14 +30,8 @@ private:
 	// 入力処理をする 
 	void Input();
 
-	// もっている角度情報を元に方向(Vec3型)を計算する 
-	void CalcDirection();
-
-
 	Model *m_Model;
 
-	// 方向転換速度 
-	const float INCREASE_ANGLE_VALUE = 0;
 
 	// プレイヤーの座標の初期値(定数)
 	const float kPlayerPosition_x = 0.2f;
@@ -63,7 +57,7 @@ private:
 	const float kPlayerNowAngle = 0;
 
 	// プレイヤーの速度の初期値(定数)
-	const float kPlayerSpeed = 0.5f;
+	const float kPlayerSpeed = 0.0f;
 };
 
 extern Player *player;

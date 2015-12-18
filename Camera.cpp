@@ -55,9 +55,8 @@ void Camera::Look()
 	
 	gluLookAt(
 		position.x, position.y + cameraWidthY, position.z + cameraDepthZ,// GLdouble eyex, eyey, eyez
-		/*gameManager.player->position.x,
-		gameManager.player->position.y,*/
-		0, 0,
-		gameManager.player->position.z,					 // GLdouble centerx, centery, centerz
-		cameraUpx, cameraUpy, cameraUpz);				 // GLdouble upx, upy, upz
+		gameManager.player->position.x,
+		gameManager.player->position.y,
+		gameManager.player->position.z,									// GLdouble centerx, centery, centerz
+		cameraUpx, cameraUpy, cameraUpz);								 // GLdouble upx, upy, upz
 }
