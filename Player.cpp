@@ -57,10 +57,7 @@ void Player::Update()
 	
 	Move();
 
-	Input();
-
 	Angle();
-
 
 }
 
@@ -78,6 +75,7 @@ void Player::Move()
 
 	direction.Normalize();
 
+	Input();
 	//position += direction * speed;
 
 }
@@ -85,15 +83,15 @@ void Player::Move()
 // 傾き処理
 void Player::Angle()
 {
-	if (KeyBoard::keyRight == true)
-	{
-		rotation.z -= 15.0f;
-		glRotatef(rotation.z, 0, 0, 1);
-	}
-	else
-	{
-		rotation.z = 0;
-	}
+	//if (KeyBoard::keyRight == true)
+	//{
+	//	rotation.z -= 15.0f;
+	//	glRotatef(rotation.z, 0, 0, 1);
+	//}
+	//else
+	//{
+	//	rotation.z = 0;
+	//}
 }
 
 // 入力処理

@@ -44,9 +44,9 @@ private:
 	const float kPlayerRotation_z = 0.0f;
 
 	// プレイヤーのスケールの初期値(定数)
-	const float kPlayerScale_x = 2.0f;
-	const float kPlayerScale_y = 2.0f;
-	const float kPlayerScale_z = 2.0f;
+	const float kPlayerScale_x = 0.3f;
+	const float kPlayerScale_y = 0.3f;
+	const float kPlayerScale_z = 0.3f;
 
 	// プレイヤーの向いてる方向の初期値(定数)
 	const float kPlayerDirection_x = 0.0f;
@@ -57,7 +57,7 @@ private:
 	const float kPlayerNowAngle = 0;
 
 	// プレイヤーの速度の初期値(定数)
-	const float kPlayerSpeed = 0.5f;
+	const float kPlayerSpeed = 0.1f;
 };
 
 extern Player *player;

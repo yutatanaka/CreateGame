@@ -47,8 +47,8 @@ void Camera::Update()
 
 void Camera::Look()
 {
-	const int cameraWidthY = 5;
-	const int cameraDepthZ = 15;
+	const int cameraWidthY = 3;
+	const int cameraDepthZ = 7;
 	const int cameraUpx = 0;
 	const int cameraUpy = 1;
 	const int cameraUpz = 0;

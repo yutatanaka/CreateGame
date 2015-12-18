@@ -77,6 +77,9 @@ void timer(int value)
 
 int main(int argc, char *argv[])
 {
+	glutInitWindowPosition(100, 100);
+
+	glutInitWindowSize(Window::Width, Window::Height);
 
 	glutInit(&argc,argv);
 	

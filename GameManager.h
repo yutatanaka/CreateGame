@@ -21,6 +21,12 @@
 #define MILLIS 1000 / 60
 #define VALUE 0
 
+enum Window
+{
+	Width = 1260,
+	Height = 980,
+};
+
 class GameManager
 {
 public:
