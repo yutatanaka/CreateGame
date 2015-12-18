@@ -57,7 +57,7 @@ private:
 	const float kPlayerNowAngle = 0;
 
 	// プレイヤーの速度の初期値(定数)
-	const float kPlayerSpeed = 0.0f;
+	const float kPlayerSpeed = 0.5f;
 };
 
 extern Player *player;

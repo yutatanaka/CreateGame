@@ -77,7 +77,8 @@ void Player::Move()
 {
 
 	direction.Normalize();
-	position += direction * speed;
+
+	//position += direction * speed;
 
 }
 
@@ -101,12 +102,12 @@ void Player::Input()
 
 	if (KeyBoard::keyRight == true)
 	{
-		position.x += 0.05;
+		position.x += speed;
 	}
 
 	if (KeyBoard::keyLeft == true)
 	{
-		position.x -= 0.05;
+		position.x -= speed;
 	}
 
 }

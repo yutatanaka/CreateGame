@@ -30,19 +30,19 @@ void Camera::Update()
 
 	// プレイヤー座標(xz) + ( プレイヤーの逆向き(xz) * 離したい距離 ) + 高さ
 
-	position = gameManager.player->direction;
+	//position = gameManager.player->direction;
 
-	position.x = -position.x;
-	position.z = -position.z;
-	position.y = cameraY_axis;
+	//position.x = -position.x;
+	//position.z = -position.z;
+	//position.y = cameraY_axis;
 
-	position.x *= releaseDistance;
-	position.z *= releaseDistance;
-	position.y *= releaseDistance;
+	//position.x *= releaseDistance;
+	//position.z *= releaseDistance;
+	//position.y *= releaseDistance;
 
-	position.x += gameManager.player->position.x;
-	position.z += gameManager.player->position.z;
-	printf("%f\n", position.z);
+	//position.x += gameManager.player->position.x;
+	//position.z += gameManager.player->position.z;
+	//printf("%f\n", position.z);
 }
 
 void Camera::Look()
@@ -53,15 +53,15 @@ void Camera::Look()
 	const int cameraUpy = 1;
 	const int cameraUpz = 0;
 	
-	gluLookAt(
-		position.x, position.y + cameraWidthY, position.z + cameraDepthZ,// GLdouble eyex, eyey, eyez
-		gameManager.player->position.x,
-		gameManager.player->position.y,
-		gameManager.player->position.z,									// GLdouble centerx, centery, centerz
-		cameraUpx, cameraUpy, cameraUpz);								 // GLdouble upx, upy, upz
-
 	//gluLookAt(
-	//	position.x, position.y + cameraWidthY, position.z + cameraDepthZ,
-	//	0, 0, 0,
-	//	cameraUpx, cameraUpy, cameraUpz);
+	//	position.x, position.y + cameraWidthY, position.z + cameraDepthZ,// GLdouble eyex, eyey, eyez
+	//	gameManager.player->position.x,
+	//	gameManager.player->position.y,
+	//	gameManager.player->position.z,									// GLdouble centerx, centery, centerz
+	//	cameraUpx, cameraUpy, cameraUpz);								 // GLdouble upx, upy, upz
+
+	gluLookAt(
+		position.x, position.y + cameraWidthY, position.z + cameraDepthZ,
+		0, 0, 0,
+		cameraUpx, cameraUpy, cameraUpz);
 }
