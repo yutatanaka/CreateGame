@@ -97,16 +97,28 @@ void Player::Angle()
 // 入力処理
 void Player::Input()
 {
-
+	// キーボードのDが押されたら
 	if (KeyBoard::keyRight == true)
 	{
 		position.x += speed;
 	}
 
+	// キーボードのAが押されたら
 	if (KeyBoard::keyLeft == true)
 	{
 		position.x -= speed;
 	}
 
+	// キーボードのWが押されたら
+	if (KeyBoard::keyUp == true)
+	{
+		position.z -= speed;
+	}
+
+	// キーボードのSが押されたら
+	if (KeyBoard::keyDown == true)
+	{
+		position.z += speed;
+	}
 }
 

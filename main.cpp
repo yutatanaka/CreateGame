@@ -20,9 +20,9 @@
 
 
 
-void Display(void){
+void Display(void)
+{
 	
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	glClearColor(RED, GREEN, BLUE, ALPHA);
@@ -72,12 +72,12 @@ void Display(void){
 void timer(int value) 
 {
 	glutTimerFunc(MILLIS, timer, VALUE);		
+	
 	glutPostRedisplay();
 }
 
 int main(int argc, char *argv[])
 {
-	glutInitWindowPosition(100, 100);
 
 	glutInitWindowSize(Window::Width, Window::Height);
 

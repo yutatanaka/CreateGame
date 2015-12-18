@@ -12,7 +12,7 @@ void Field::Update()
 
 void Field::Draw()
 {
-	glColor3f(1, 1, 0);
+	glColor3f(0, 0, 0);
 	// è∞ÇÃï`âÊ
 	glBegin(GL_LINES);
 	{
@@ -33,7 +33,6 @@ void Field::Draw()
 	// xÅAyÅAzé≤
 	glBegin(GL_LINES);
 	{
-		glColor3f(1, 0, 0);
 		glVertex3f(0, 0, 0);
 		glVertex3f(0, 100, 0);
 
