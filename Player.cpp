@@ -57,8 +57,6 @@ void Player::Update()
 	
 	Move();
 
-	Angle();
-
 }
 
 
@@ -83,24 +81,37 @@ void Player::Move()
 // 傾き処理
 void Player::Angle()
 {
-	//if (KeyBoard::keyRight == true)
+	//　Ｄキーが押されたら
+	if (KeyBoard::keyRight == true)
+	{
+		rotation.z -= 1.0f;
+	}
+	//　Aキーが押されたら
+	if (KeyBoard::keyLeft == true)
+	{
+		rotation.z += 1.0f;
+
+	}
+
+	if (rotation.z >= -1 && rotation.z <= -15)
+	{
+		rotation.z += 1.0f;
+	}
+	//if (rotation.z >= -1 && rotation.z <= -15)
 	//{
-	//	rotation.z -= 15.0f;
-	//	glRotatef(rotation.z, 0, 0, 1);
-	//}
-	//else
-	//{
-	//	rotation.z = 0;
+	//	rotation.z -= 1.0f;
 	//}
 }
 
 // 入力処理
 void Player::Input()
 {
+	Angle();
 	// キーボードのDが押されたら
 	if (KeyBoard::keyRight == true)
 	{
 		position.x += speed;
+		
 	}
 
 	// キーボードのAが押されたら
